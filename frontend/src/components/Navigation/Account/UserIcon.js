@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setClickedAccount } from '../../../store/menu.js';
+import { clearRecipeData } from '../../../store/setRecipe.js';
 
 const UserIcon = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,10 @@ const UserIcon = () => {
     if (user && Object.keys(user).length) return (
         <div className='flex justify-end w-48'>
             <div 
-            onClick={() => dispatch(setClickedAccount())}
+            onClick={() => {
+                dispatch(setClickedAccount());
+                dispatch(clearRecipeData());
+            }}
             className={`
                 text-white bg-amber-800 cursor-pointer leading-10 w-20 rounded-lg text-center border-b-4 border-amber-900 text-lg
             `}>

@@ -14,18 +14,18 @@ const AllRecipesContainer = () => {
 
     return (
         <div className={`
+            overflow-auto pb-20
             flex justify-evenly
         `}>
             {
                 recipes && recipes.length &&
                 recipes.map(currRecipe => 
                 <Recipe 
+                id={currRecipe.id}
                 brand={currRecipe.brand} 
                 item={currRecipe.item} 
-                cookTemp={currRecipe.cookTemp} 
-                cookTime={currRecipe.cookTime / 60} 
                 avgRating={currRecipe.avgRating} 
-                previewImg={currRecipe.previewImg} />)
+                />)
             }
         </div>
     );
