@@ -29,7 +29,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedNewRecipe(clicked => !clicked)}
                 className={`
-                    text-white bg-amber-800 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-amber-900 text-lg mt-20 my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-6
                 `}>
                     New Recipe
                 </div>
@@ -37,7 +37,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedFavorites(clicked => !clicked)}
                 className={`
-                    text-white bg-amber-800 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-amber-900 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     My Favorites
                 </div>
@@ -45,7 +45,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedRecipes(clicked => !clicked)}
                 className={`
-                    text-white bg-amber-800 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-amber-900 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     My Recipes
                 </div>
@@ -56,7 +56,7 @@ const UserOptionsContainer = () => {
                     dispatch(resetMenu());
                 }}
                 className={`
-                    text-white bg-amber-800 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-amber-900 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     Log Out
                 </div>

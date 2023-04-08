@@ -16,12 +16,12 @@ const CreateRecipe = () => {
     const [notes, setNotes] = useState('');
 
     return (
-        <div className='text-white mt-20'>
+        <div className='text-white mt-28 m-auto bg-sky-300 rounded-lg shadow w-90'>
             <div className={`
                 flex justify-center flex-wrap
                 ${prompt !== 0 && 'hidden'}
             `}>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg w-full text-center'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg w-full text-center'>
                     What is the product brand?
                 </div>
 
@@ -37,7 +37,7 @@ const CreateRecipe = () => {
                 flex justify-center flex-wrap
                 ${prompt !== 1 && 'hidden'}
             `}>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg w-full text-center'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg w-full text-center'>
                     What type of food is this?
                 </div>
 
@@ -53,7 +53,7 @@ const CreateRecipe = () => {
                 flex justify-center flex-wrap
                 ${prompt !== 2 && 'hidden'}
             `}>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg w-full text-center'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg w-full text-center'>
                     How many minutes should it cook for?
                 </div>
 
@@ -69,7 +69,7 @@ const CreateRecipe = () => {
                 flex justify-center flex-wrap
                 ${prompt !== 3 && 'hidden'}
             `}>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg w-full text-center'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg w-full text-center'>
                     What temperature does it need to be cooked on?
                 </div>
 
@@ -85,7 +85,7 @@ const CreateRecipe = () => {
                 flex justify-center flex-wrap
                 ${prompt !== 4 && 'hidden'}
             `}>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg w-full text-center'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg w-full text-center'>
                     Please leave any additional notes here!
                 </div>
 
@@ -103,7 +103,7 @@ const CreateRecipe = () => {
                     if (prompt === 0) return;
                     setPrompt(prompt - 1)
                 }}
-                className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg cursor-pointer'>
+                className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
                     Back
                 </div>
 
@@ -116,7 +116,7 @@ const CreateRecipe = () => {
 
                     setPrompt(prompt + 1);
                 }}
-                className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg cursor-pointer'>
+                className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
                     {prompt < 4 ? 'Next' : 'Submit'}
                 </div>
             </div>

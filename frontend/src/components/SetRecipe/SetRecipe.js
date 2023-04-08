@@ -16,11 +16,11 @@ const SetRecipe = () => {
     if (setRecipe && Object.keys(setRecipe).length) return (
         <div 
         className={`
-            text-white bg-amber-400 overflow-auto
+            text-white bg-sky-200 overflow-auto
             h-screen w-screen p-4 pt-2 pb-20
             text-center
         `}>
-            <div className='m-4 p-10 w-max bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg mx-auto'>
+            <div className='m-4 p-10 w-max bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow'>
                 <p className='my-2'>Brand: {setRecipe.brand}</p>
                 <p className='my-2'>Item: {setRecipe.item}</p>
                 <p className='my-2'>Cooking Temperature: {setRecipe.cookTemp}</p>
@@ -30,13 +30,13 @@ const SetRecipe = () => {
             </div>
             
             <div className='flex justify-between'>
-                <div className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg'>
                     {setRecipe.Comments.length} Comments
                 </div>
 
                 <div 
                 onClick={() => setClickedAdd(clicked => !clicked)}
-                className='m-2 p-4 bg-amber-600 rounded-lg border-b-4 border-amber-900 text-lg cursor-pointer'>
+                className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
                     Add Comment
                 </div>
             </div>
@@ -48,7 +48,7 @@ const SetRecipe = () => {
                 <input 
                 onChange={e => setComment(e.target.value)}
                 className={`
-                    rounded-md ml-44 cursor-pointer text-center w-3/6 h-full text-black
+                    rounded-md ml-44 cursor-pointer text-center w-3/6 h-full text-black shadow
                 `}>
                 </input>
 
@@ -59,7 +59,7 @@ const SetRecipe = () => {
                     await setClickedAdd(false);
                     await setComment('');
                 }}
-                className='p-6 ml-4 bg-amber-600 rounded-lg border-b-4 w-44 border-amber-900 text-lg cursor-pointer'>
+                className='p-6 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg cursor-pointer'>
                     Submit
                 </div>
             </div>

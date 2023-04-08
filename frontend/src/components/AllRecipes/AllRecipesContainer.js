@@ -14,8 +14,8 @@ const AllRecipesContainer = () => {
 
     return (
         <div className={`
-            overflow-auto pb-20
-            flex justify-evenly
+            overflow-auto pb-40 h-screen w-5/6 m-auto shadow mt-2 rounded-lg
+            flex justify-evenly flex-wrap
         `}>
             {
                 recipes && recipes.length &&
