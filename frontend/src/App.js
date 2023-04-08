@@ -1,12 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 
-import Home from './components/Home/Home.js';
+import AllRecipesContainer from './components/AllRecipes/AllRecipesContainer.js';
+import NavBar from './components/Navigation/NavBar.js';
+
+import './index.css';
 
 const App = () => {
   return (
-    <Routes>
-      <Route exact path='/' element={<Home />} />
-    </Routes>
+    <div>
+      <NavBar />
+      <Routes>
+        <Route exact path='/' element={<AllRecipesContainer />} />
+      </Routes>
+    </div>
   );
 };
 
