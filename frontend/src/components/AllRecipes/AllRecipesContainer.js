@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { fetchRecipes } from '../../store/recipes.js';
 
@@ -14,7 +14,7 @@ const AllRecipesContainer = () => {
 
     return (
         <div className={`
-            flex justify-evenly bg-amber-400 h-screen
+            flex justify-evenly
         `}>
             {
                 recipes && recipes.length &&

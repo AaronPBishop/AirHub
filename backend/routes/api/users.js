@@ -38,7 +38,7 @@ router.post('/', validateSignup, async (req, res, next) => {
     } catch (e) {
       e.status = 400;
       next(e);
-    }
+    };
 });
 
 module.exports = router;

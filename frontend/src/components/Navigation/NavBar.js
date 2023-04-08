@@ -1,6 +1,6 @@
 import Logo from "./Logo.js";
 import SearchBar from "./SearchBar.js";
-import UserIcon from "./UserIcon.js";
+import AccountContainer from "./Account/AccountContainer.js";
 
 const NavBar = () => {
     return (
@@ -10,7 +10,7 @@ const NavBar = () => {
         `}>
             <Logo />
             <SearchBar />
-            <UserIcon />
+            <AccountContainer />
         </div>
     );
 };

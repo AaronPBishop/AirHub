@@ -1,9 +1,13 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from "redux-thunk";
 
+import userReducer from './user.js';
+import menuReducer from './menu.js';
 import recipeReducer from './recipes.js';
 
 const rootReducer = combineReducers({
+    user: userReducer,
+    menu: menuReducer,
     recipes: recipeReducer
 });
 
