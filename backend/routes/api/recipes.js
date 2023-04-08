@@ -92,6 +92,28 @@ router.delete('/:recipeId', async (req, res) => {
 });
 
 
+// Rate Recipe By Id
+router.put('/:recipeId/rate', async (req, res) => {
+    const { rating } = req.body;
+
+    const queriedRecipe = await Recipe.findByPk(req.params.recipeId);
+
+    if (!queriedRecipe) return res.status(404).json({"message": "This recipe no longer exists", "statusCode": 404});
+
+    const currentRating = queriedRecipe.avgRating;
+
+    if (currentRating === null) {
+        await queriedRecipe.update({ avgRating: Number(rating) });
+        return res.json({ queriedRecipe });
+    };
+
+    const newRating = (currentRating + Number(rating)) / 2;
+    await queriedRecipe.update({ avgRating: Number(newRating.toFixed(2)) });
+
+    return res.json({ queriedRecipe });
+});
+
+
 // Create New Comment
 router.post('/:recipeId/new_comment', async (req, res, next) => {
     const { comment } = req.body;

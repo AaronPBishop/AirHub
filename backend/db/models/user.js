@@ -50,7 +50,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Recipe, { foreignKey: 'ownerId', onDelete: 'CASCADE' });
       User.hasMany(models.Comment, { foreignKey: 'userId', onDelete: 'CASCADE' });
-      User.belongsToMany(models.Recipe, { through: models.Favorite });
     }
   }
   User.init({

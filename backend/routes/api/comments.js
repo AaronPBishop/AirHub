@@ -20,7 +20,7 @@ router.put('/:commentId', async (req, res) => {
 });
 
 
-// Delete Recipe By Id
+// Delete Comment By Id
 router.delete('/:commentId', async (req, res) => {
     const queriedComment = await Comment.findByPk(req.params.commentId);
 
