@@ -10,6 +10,12 @@ export const populateUserData = (userData) => {
     };
 };
 
+export const clearUserData = () => {
+    return {
+        type: 'CLEAR_USER_DATA'
+    };
+};
+
 
 // THUNKS
 export const createrUserAccount = (firstName, lastName, email, password) => async (dispatch) => {
@@ -49,12 +55,24 @@ export const restoreUser = () => async (dispatch) => {
     dispatch(populateUserData(resData));
 };
 
+export const deleteSession = () => async (dispatch) => {
+    await csrfFetch('/api/session', {
+      method: 'DELETE'
+    });
+
+    dispatch(clearUserData());
+};
+
 
 // MAIN REDUCER
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'POPULATE_USER_DATA': {
             return { ...action.payload };
+        };
+
+        case 'CLEAR_USER_DATA': {
+            return {};
         };
 
         default: return state;

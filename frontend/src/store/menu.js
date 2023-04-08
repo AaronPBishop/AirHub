@@ -60,6 +60,19 @@ const menuReducer = (state = initialState, action) => {
             return currentState;
         };
 
+        case 'CLICKED_ACCOUNT': {
+            if (currentState.clickedAccount) {
+                currentState.clickedAccount = false;
+                return currentState;
+            };
+
+            for (let key in currentState) currentState[key] = false;
+            
+            currentState.clickedAccount = true;
+
+            return currentState;
+        };
+
         case 'RESET_MENU': {
             for (let key in currentState) currentState[key] = false;
 
