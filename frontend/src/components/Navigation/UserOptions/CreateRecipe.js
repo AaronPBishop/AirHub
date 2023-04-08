@@ -11,7 +11,7 @@ const CreateRecipe = () => {
 
     const [brand, setBrand] = useState('');
     const [item, setItem] = useState('');
-    const [cookTime, setCookTime] = useState('');
+    const [cookTime, setCookTime] = useState(8);
     const [cookTemp, setCookTemp] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -57,12 +57,29 @@ const CreateRecipe = () => {
                     How many minutes should it cook for?
                 </div>
 
-                <input 
-                onChange={e => setCookTime(e.target.value * 60)}
+                <div 
                 className={`
-                    m-2 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    flex justify-center
+                    m-2 p-4 rounded-md text-center text-black w-full h-36
                 `}>
-                </input>
+                    <div className='font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-lime-200'>
+                        {cookTime} minutes
+                    </div>
+
+                    <div className='flex text-lg text-white w-36'>
+                        <div
+                        onClick={() => setCookTime(cookTime + 1)}
+                        className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
+                            +
+                        </div>
+
+                        <div
+                        onClick={() => setCookTime(cookTime - 1)}
+                        className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
+                            -
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className={`
@@ -110,8 +127,17 @@ const CreateRecipe = () => {
                 <div 
                 onClick={async () => {
                     if (prompt === 4) {
-                        await dispatch(createRecipe(brand, item, cookTime, cookTemp, notes));
+                        await dispatch(createRecipe(brand, item, (cookTime * 60), cookTemp, notes));
                         await dispatch(resetMenu());
+
+                        setPrompt(0);
+                        setBrand('');
+                        setItem('');
+                        setCookTime(0);
+                        setCookTemp('');
+                        setNotes('');
+                        
+                        return;
                     };
 
                     setPrompt(prompt + 1);
