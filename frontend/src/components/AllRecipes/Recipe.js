@@ -12,8 +12,8 @@ const Recipe = ({ brand, item, cookTemp, cookTime, avgRating, previewImg }) => {
         `}>
             <p>Brand: {brand}</p>
             <p>Item: {item}</p>
-            <p>Cook Temp: {cookTemp}</p>
-            <p>Cook Time: {cookTime}</p>
+            <p>Cook Temp: {cookTemp} degrees</p>
+            <p>Cook Time: {cookTime} minutes</p>
             <p>Rating: {avgRating} stars</p>
         </div>
     );
