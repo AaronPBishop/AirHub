@@ -15,22 +15,23 @@ router.get('/', async (req, res) => {
 
 // Create New Recipe
 router.post('/', async (req, res, next) => {
-    const { brand, item, cookTime, cookTemp, notes, previewImg } = req.body;
+    const { brand, item, cookTime, cookTemp, notes } = req.body;
 
     const ownerId = req.user.id;
 
     try {
-        const newRecipe = await Recipe.create({
+        await Recipe.create({
             ownerId,
             brand,
             item,
             cookTime,
             cookTemp,
-            notes,
-            previewImg
+            notes
         });
 
-        return res.status(201).json(newRecipe);
+        const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'avgRating', 'previewImg'] });
+
+        return res.json({ recipes: allRecipes });
     } catch (e) {
         e.status = 400;
         next(e);

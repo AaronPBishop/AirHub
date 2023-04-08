@@ -1,3 +1,5 @@
+import { csrfFetch } from './csrf';
+
 const initialState = {};
 
 // ACTION CREATORS
@@ -12,6 +14,23 @@ export const populateRecipes = (recipes) => {
 export const fetchRecipes = () => async (dispatch) => {
     const fetchReq = await fetch(`/api/recipes`, {
         method: 'GET'
+    });
+
+    const resData = await fetchReq.json();
+
+    dispatch(populateRecipes(resData));
+};
+
+export const createRecipe = (brand, item, cookTime, cookTemp, notes) => async (dispatch) => {
+    const fetchReq = await csrfFetch(`/api/recipes`, {
+        method: 'POST',
+        body: JSON.stringify({
+            brand,
+            item,
+            cookTime,
+            cookTemp,
+            notes
+        })
     });
 
     const resData = await fetchReq.json();
