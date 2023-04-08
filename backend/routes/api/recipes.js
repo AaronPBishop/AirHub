@@ -91,4 +91,23 @@ router.delete('/:recipeId', async (req, res) => {
     return res.json({ status: 'Successfully deleted' });
 });
 
+
+// Create New Comment
+router.post('/:recipeId/new_comment', async (req, res, next) => {
+    const { comment } = req.body;
+
+    try {
+        const newComment = await Comment.create({
+            userId: req.user.id,
+            recipeId: req.params.recipeId,
+            comment
+        });
+
+        return res.status(201).json(newComment);
+    } catch (e) {
+        e.status = 400;
+        next(e);
+    };
+});
+
 module.exports = router;
