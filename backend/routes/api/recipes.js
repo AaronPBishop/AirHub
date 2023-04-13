@@ -1,7 +1,7 @@
 const express = require('express');
 const { Sequelize, Op } = require('sequelize');
 
-const { Recipe, Comment } = require('../../db/models');
+const { Recipe, Comment, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -55,8 +55,14 @@ router.get('/:recipeId', async (req, res) => {
             {
                 model: Comment,
                 as: 'Comments',
-                attributes: ['id', 'userId', 'comment']
-            }
+                attributes: ['id', 'userId', 'comment'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['firstName', 'lastName']
+                    }
+                ]
+            },
         ],
     });
 
