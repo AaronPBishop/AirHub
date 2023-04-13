@@ -12,7 +12,7 @@ const BaseContainer = () => {
 
     return (
         <div className={`
-            bg-sky-200 h-screen
+            bg-sky-200
         `}>
             <div className={`
                 ${

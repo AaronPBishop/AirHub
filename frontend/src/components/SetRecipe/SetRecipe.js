@@ -68,7 +68,7 @@ const SetRecipe = () => {
                 {
                     setRecipe.Comments.length &&
                     setRecipe.Comments.map(cmnt =>
-                        <RecipeComment comment={cmnt.comment} />
+                        <RecipeComment firstName={cmnt.User.firstName} lastName={cmnt.User.lastName} comment={cmnt.comment} />
                     )
                 }
             </div>
