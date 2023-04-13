@@ -125,7 +125,7 @@ router.put('/:recipeId/rate', async (req, res) => {
     const newRating = (currentRating + Number(rating)) / 2;
     await queriedRecipe.update({ avgRating: Number(newRating.toFixed(2)) });
 
-    return res.json({ queriedRecipe });
+    return res.json({ recipe: queriedRecipe });
 });
 
 

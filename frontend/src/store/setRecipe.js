@@ -34,6 +34,13 @@ export const postNewComment = (id, comment) => async () => {
     });
 };
 
+export const rateRecipe = (id, rating) => async () => {
+    await csrfFetch(`/api/recipes/${id}/rate`, {
+        method: 'PUT',
+        body: JSON.stringify({ rating })
+    });
+};
+
 // MAIN REDUCER
 const setRecipeReducer = (state = initialState, action) => {
     switch (action.type) {

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { fetchSetRecipe, postNewComment } from '../../store/setRecipe';
+import { fetchSetRecipe, postNewComment, rateRecipe } from '../../store/setRecipe';
 
 import RecipeComment from './RecipeComment';
 
@@ -12,6 +12,20 @@ const SetRecipe = () => {
 
     const [clickedAdd, setClickedAdd] = useState(false);
     const [comment, setComment] = useState('');
+
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(5);
+
+    useEffect(() => {
+        const setRating = async () => {
+            if (setRecipe && Object.keys(setRecipe).length) {
+                await dispatch(rateRecipe(setRecipe.id, rating));
+                await dispatch(fetchSetRecipe(setRecipe.id));
+            };
+        };
+
+        setRating();
+    }, [rating]);
 
     if (setRecipe && Object.keys(setRecipe).length) return (
         <div 
@@ -32,6 +46,32 @@ const SetRecipe = () => {
             <div className='flex justify-between'>
                 <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg'>
                     {setRecipe.Comments.length} Comments
+                </div>
+
+                <div
+                onMouseLeave={() => !rating ? setHover(5) : setHover(rating)} 
+                className='flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700'>
+                    {
+                        
+                        Array.from({length: 5}).map((el, i) => {
+                            i += 1;
+                            return (
+                                <div
+                                key={i}
+                                onClick={() => {
+                                    setRating(i);
+                                    setHover(i);
+                                }}
+                                onMouseEnter={() => setHover(i)}
+                                className={`
+                                    ${hover < i ? 'text-white' : 'text-yellow-200'}
+                                    mt-2 cursor-pointer p-2
+                                `}>
+                                    <span className='text-4xl'>&#9733;</span>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
 
                 <div 
