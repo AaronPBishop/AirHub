@@ -5,12 +5,14 @@ import userReducer from './user.js';
 import menuReducer from './menu.js';
 import recipeReducer from './recipes.js';
 import setRecipeReducer from './setRecipe.js';
+import favoriteReducer from './favorites.js';
 
 const rootReducer = combineReducers({
     user: userReducer,
     menu: menuReducer,
     recipes: recipeReducer,
-    setRecipe: setRecipeReducer
+    setRecipe: setRecipeReducer,
+    favorites: favoriteReducer
 });
 
 let enhancer;

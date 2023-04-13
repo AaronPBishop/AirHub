@@ -12,9 +12,7 @@ export const populateRecipes = (recipes) => {
 
 // THUNKS
 export const fetchRecipes = () => async (dispatch) => {
-    const fetchReq = await fetch(`/api/recipes`, {
-        method: 'GET'
-    });
+    const fetchReq = await fetch(`/api/recipes`, { method: 'GET' });
 
     const resData = await fetchReq.json();
 

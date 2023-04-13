@@ -1,13 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { fetchSetRecipe, postNewComment, rateRecipe } from '../../store/setRecipe';
+import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe } from '../../store/setRecipe';
 
 import RecipeComment from './RecipeComment';
+import { fetchFavorites } from '../../store/favorites';
 
 const SetRecipe = () => {
     const dispatch = useDispatch();
 
+    const userId = useSelector(state => state.user.user && state.user.user.id);
     const setRecipe = useSelector(state => state.setRecipe.recipe);
 
     const [clickedAdd, setClickedAdd] = useState(false);
@@ -34,13 +36,37 @@ const SetRecipe = () => {
             h-screen w-screen p-4 pt-2 pb-20
             text-center
         `}>
-            <div className='m-4 p-10 w-max bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow'>
-                <p className='my-2'>Brand: {setRecipe.brand}</p>
-                <p className='my-2'>Item: {setRecipe.item}</p>
-                <p className='my-2'>Cooking Temperature: {setRecipe.cookTemp}</p>
-                <p className='my-2'>Total Cook Time: {setRecipe.cookTime / 60} minutes</p>
-                <p className='my-2'>Additional Notes: {setRecipe.notes}</p>
-                <p className='my-2'>Rating: {setRecipe.avgRating} stars</p>
+            <div className='flex'>
+                <div
+                onClick={async () => {
+                    await dispatch(favoriteRecipe(userId, setRecipe.id));
+                    await dispatch(fetchFavorites(userId));
+                }} 
+                className='m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
+                    Favorite
+                </div>
+            </div>
+
+            <div className='mb-4 p-10 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow'>
+                <p className='my-3 font-bold'>
+                    Brand: <span className='text-yellow-200'>{setRecipe.brand}</span>
+                </p>
+                <p className='my-3 font-bold'>
+                    Item: <span className='text-yellow-200'>{setRecipe.item}</span>
+                </p>
+                <p className='my-3 font-bold'>
+                    Cook Temperature: <span className='text-yellow-200'>{setRecipe.cookTemp}</span>
+                </p>
+                <p className='my-3 font-bold'>
+                    Total Cook Time: <span className='text-yellow-200'>{setRecipe.cookTime}</span>
+                </p>
+                <p className='my-3 font-bold'>
+                    Additional Notes 
+                    <p className='text-yellow-200'>{setRecipe.notes}</p>
+                </p>
+                <p className='my-3 font-bold'>
+                    <span className='text-yellow-200'>{setRecipe.avgRating && `⭐ ${setRecipe.avgRating}`}</span>
+                </p>
             </div>
             
             <div className='flex justify-between'>

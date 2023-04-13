@@ -41,6 +41,13 @@ export const rateRecipe = (id, rating) => async () => {
     });
 };
 
+export const favoriteRecipe = (userId, recipeId) => async () => {
+    await csrfFetch(`/api/favorites`, {
+        method: 'POST',
+        body: JSON.stringify({ userId, recipeId })
+    });
+};
+
 // MAIN REDUCER
 const setRecipeReducer = (state = initialState, action) => {
     switch (action.type) {

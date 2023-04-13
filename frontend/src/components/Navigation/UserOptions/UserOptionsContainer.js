@@ -5,6 +5,7 @@ import { deleteSession } from '../../../store/user.js';
 import { resetMenu } from '../../../store/menu.js';
 
 import CreateRecipe from './CreateRecipe.js';
+import FavoritesContainer from './FavoritesContainer.js';
 
 const UserOptionsContainer = () => {
     const dispatch = useDispatch();
@@ -66,6 +67,12 @@ const UserOptionsContainer = () => {
                 ${!clickedNewRecipe && 'hidden'}
             `}>
                 <CreateRecipe />
+            </div>
+
+            <div className={`
+                ${!clickedFavorites && 'hidden'}
+            `}>
+                <FavoritesContainer />
             </div>
         </div>
     );

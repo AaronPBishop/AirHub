@@ -1,13 +1,17 @@
 import { useDispatch } from 'react-redux';
 
 import { fetchSetRecipe } from '../../store/setRecipe.js';
+import { resetMenu } from '../../store/menu.js';
 
 const Recipe = ({ id, brand, item, avgRating }) => {
     const dispatch = useDispatch();
 
     return (
         <div 
-        onClick={() => dispatch(fetchSetRecipe(id))}
+        onClick={() => {
+            dispatch(resetMenu());
+            dispatch(fetchSetRecipe(id));
+        }}
         className={`
             text-white bg-sky-700 
             h-64 w-64 p-4 pt-12 

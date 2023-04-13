@@ -22,7 +22,7 @@ router.get('/:userId', async (req, res) => {
         include: { model: Recipe }
     });
 
-    return res.json({ favorites: userFavorites });
+    return res.json({ recipes: userFavorites });
 });
 
 module.exports = router;
