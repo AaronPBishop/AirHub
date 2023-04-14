@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 
 let options = {};
-options.tableName = 'Recipe';
+options.tableName = 'recipes';
 
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA; 
