@@ -99,6 +99,7 @@ const SetRecipe = () => {
                 onClick={async () => {
                     await dispatch(deleteRecipe(setRecipe.id));
                     await dispatch(fetchRecipes());
+                    await dispatch(restoreUser());
                 }}
                 className={`
                     ${!isOwner && 'hidden'}

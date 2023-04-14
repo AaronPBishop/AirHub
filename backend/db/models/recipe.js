@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     cookTemp: DataTypes.INTEGER,
     notes: DataTypes.STRING,
     avgRating: DataTypes.DECIMAL,
-    previewImg: DataTypes.STRING
+    userRatings: {
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: {},
+    },
+    previewImg: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Recipe',

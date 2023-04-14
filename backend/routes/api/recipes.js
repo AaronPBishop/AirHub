@@ -103,19 +103,29 @@ router.delete('/:recipeId', async (req, res) => {
 router.put('/:recipeId/rate', async (req, res) => {
     const { rating } = req.body;
 
+    const userId = req.user.id;
+
     const queriedRecipe = await Recipe.findByPk(req.params.recipeId);
 
     if (!queriedRecipe) return res.status(404).json({"message": "This recipe no longer exists", "statusCode": 404});
 
-    const currentRating = queriedRecipe.avgRating;
+    const userRatings = queriedRecipe.userRatings;
+    const previousRating = userRatings[userId];
 
-    if (currentRating === null) {
-        await queriedRecipe.update({ avgRating: Number(rating) });
+    const allRatings = Object.values(userRatings);
+    const avgRating = allRatings.reduce((sum, rating) => sum + rating, 0) / allRatings.length;
+
+    if (previousRating === undefined) {
+        userRatings[userId] = rating;
+
+        await queriedRecipe.update({ avgRating: rating, userRatings });
+
         return res.json({ queriedRecipe });
+    } else {
+        userRatings[userId] = (previousRating + rating) / 2;
     };
 
-    const newRating = (currentRating + Number(rating)) / 2;
-    await queriedRecipe.update({ avgRating: Number(newRating.toFixed(2)) });
+    await queriedRecipe.update({ avgRating, userRatings });
 
     return res.json({ recipe: queriedRecipe });
 });
