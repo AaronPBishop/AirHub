@@ -24,9 +24,10 @@ const UserOptionsContainer = () => {
     }, [menu]);
 
     return (
-        <div>
+        <div className={`
+            ${!clickedFavorites && !clickedRecipes && 'mt-14 pb-36'}
+        `}>
             <div className={`
-                mt-32 pb-36
                 ${clickedNewRecipe ? 'hidden' : clickedFavorites ? 'hidden' : clickedRecipes && 'hidden'}
             `}>
                 <div
@@ -67,6 +68,7 @@ const UserOptionsContainer = () => {
 
             <div className={`
                 ${!clickedNewRecipe && 'hidden'}
+                pb-20
             `}>
                 <CreateRecipe />
             </div>

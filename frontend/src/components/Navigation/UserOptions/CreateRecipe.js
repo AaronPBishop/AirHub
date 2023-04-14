@@ -17,7 +17,7 @@ const CreateRecipe = () => {
     const [notes, setNotes] = useState('');
 
     return (
-        <div style={{width: '36vw'}} className='text-white mt-32 m-auto bg-sky-300 rounded-lg shadow'>
+        <div style={{width: '36vw'}} className='text-white mt-20 m-auto bg-sky-300 rounded-lg shadow'>
             <div className={`
                 flex justify-center flex-wrap
                 ${prompt !== 0 && 'hidden'}
