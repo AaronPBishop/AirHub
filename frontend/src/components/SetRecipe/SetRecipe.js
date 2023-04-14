@@ -92,7 +92,7 @@ const SetRecipe = () => {
                     Cook Temperature: <span className='text-yellow-200'>{setRecipe.cookTemp}</span>
                 </p>
                 <p className='my-3 font-bold'>
-                    Total Cook Time: <span className='text-yellow-200'>{setRecipe.cookTime}</span>
+                    Total Cook Time: <span className='text-yellow-200'>{setRecipe.cookTime} minutes</span>
                 </p>
                 <p className='my-3 font-bold'>
                     Additional Notes 

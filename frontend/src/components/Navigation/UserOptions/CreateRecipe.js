@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { createRecipe } from '../../../store/recipes.js';
 import { resetMenu } from '../../../store/menu.js';
+import { restoreUser } from '../../../store/user.js';
 
 const CreateRecipe = () => {
     const dispatch = useDispatch();
@@ -12,11 +13,11 @@ const CreateRecipe = () => {
     const [brand, setBrand] = useState('');
     const [item, setItem] = useState('');
     const [cookTime, setCookTime] = useState(8);
-    const [cookTemp, setCookTemp] = useState('');
+    const [cookTemp, setCookTemp] = useState(400);
     const [notes, setNotes] = useState('');
 
     return (
-        <div className='text-white mt-28 m-auto bg-sky-300 rounded-lg shadow w-90'>
+        <div style={{width: '36vw'}} className='text-white mt-32 m-auto bg-sky-300 rounded-lg shadow'>
             <div className={`
                 flex justify-center flex-wrap
                 ${prompt !== 0 && 'hidden'}
@@ -28,7 +29,7 @@ const CreateRecipe = () => {
                 <input 
                 onChange={e => setBrand(e.target.value)}
                 className={`
-                    m-2 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
                 </input>
             </div>
@@ -44,7 +45,7 @@ const CreateRecipe = () => {
                 <input 
                 onChange={e => setItem(e.target.value)}
                 className={`
-                    m-2 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
                 </input>
             </div>
@@ -60,7 +61,7 @@ const CreateRecipe = () => {
                 <div 
                 className={`
                     flex justify-center
-                    m-2 p-4 rounded-md text-center text-black w-full h-36
+                    p-4 rounded-md text-center text-black w-full
                 `}>
                     <div className='font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-lime-200'>
                         {cookTime} minutes
@@ -91,9 +92,11 @@ const CreateRecipe = () => {
                 </div>
 
                 <input 
+                value={cookTemp}
+                type='number'
                 onChange={e => setCookTemp(e.target.value)}
                 className={`
-                    m-2 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
                 </input>
             </div>
@@ -109,7 +112,7 @@ const CreateRecipe = () => {
                 <input 
                 onChange={e => setNotes(e.target.value)}
                 className={`
-                    m-2 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
                 </input>
             </div>
@@ -127,14 +130,15 @@ const CreateRecipe = () => {
                 <div 
                 onClick={async () => {
                     if (prompt === 4) {
-                        await dispatch(createRecipe(brand, item, (cookTime * 60), cookTemp, notes));
+                        await dispatch(createRecipe(brand, item, cookTime, cookTemp, notes));
                         await dispatch(resetMenu());
+                        await dispatch(restoreUser());
 
                         setPrompt(0);
                         setBrand('');
                         setItem('');
-                        setCookTime(0);
-                        setCookTemp('');
+                        setCookTime(8);
+                        setCookTemp(400);
                         setNotes('');
                         
                         return;

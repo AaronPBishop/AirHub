@@ -6,6 +6,7 @@ import { resetMenu } from '../../../store/menu.js';
 
 import CreateRecipe from './CreateRecipe.js';
 import FavoritesContainer from './FavoritesContainer.js';
+import UserRecipesContainer from './UserRecipesContainer.js';
 
 const UserOptionsContainer = () => {
     const dispatch = useDispatch();
@@ -25,12 +26,13 @@ const UserOptionsContainer = () => {
     return (
         <div>
             <div className={`
+                mt-28
                 ${clickedNewRecipe ? 'hidden' : clickedFavorites ? 'hidden' : clickedRecipes && 'hidden'}
             `}>
                 <div
                 onClick={() => setClickedNewRecipe(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-6
                 `}>
                     New Recipe
                 </div>
@@ -38,7 +40,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedFavorites(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     My Favorites
                 </div>
@@ -46,7 +48,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedRecipes(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     My Recipes
                 </div>
@@ -57,7 +59,7 @@ const UserOptionsContainer = () => {
                     dispatch(resetMenu());
                 }}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-60 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
                 `}>
                     Log Out
                 </div>
@@ -73,6 +75,12 @@ const UserOptionsContainer = () => {
                 ${!clickedFavorites && 'hidden'}
             `}>
                 <FavoritesContainer />
+            </div>
+
+            <div className={`
+                ${!clickedRecipes && 'hidden'}
+            `}>
+                <UserRecipesContainer />
             </div>
         </div>
     );
