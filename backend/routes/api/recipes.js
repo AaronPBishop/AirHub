@@ -39,14 +39,6 @@ router.post('/', async (req, res, next) => {
 });
 
 
-// Get All of a User's Recipes
-router.get('/user_recipes', async (req, res) => {
-    const userRecipes = await Recipe.findAll({ where: { ownerId: req.user.id }});
-
-    return res.json({ recipes: userRecipes });
-});
-
-
 // Get Recipe By Id
 router.get('/:recipeId', async (req, res) => {
     const queriedRecipe = await Recipe.findOne({

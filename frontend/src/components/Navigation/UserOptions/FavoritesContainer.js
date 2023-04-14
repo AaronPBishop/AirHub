@@ -1,17 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
-import { fetchFavorites } from '../../../store/favorites.js';
+import { useSelector } from 'react-redux';
 
 import Recipe from '../../AllRecipes/Recipe.js';
 
 const FavoritesContainer = () => {
-    const dispatch = useDispatch();
+    const favorites = useSelector(state => state.user.user && state.user.user.favorites);
 
-    const userId = useSelector(state => state.user.user && state.user.user.id);
-    const favorites = useSelector(state => state.favorites.recipes);
-
-    useEffect(() => { if (userId) dispatch(fetchFavorites(userId)) }, [userId]);
+    console.log(favorites)
 
     return (
         <div

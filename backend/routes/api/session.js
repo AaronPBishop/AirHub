@@ -3,7 +3,9 @@ const express = require('express');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const { User } = require('../../db/models');
+const { Sequelize, Op } = require('sequelize');
+
+const { User, Recipe, Favorite } = require('../../db/models');
 const { check } = require('express-validator');
 
 const router = express.Router();
@@ -18,11 +20,20 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.get('/', restoreUser, (req, res) => {
+router.get('/', restoreUser, async (req, res) => {
     const { user } = req;
 
-    if (user) return res.json({ user: user.toSafeObject() })
-    else return res.json({});
+    if (user) {
+      const userRecipes = await Recipe.findAll({ where: { ownerId: req.user.id }});
+      const favorites = await Favorite.findAll({ 
+        where: { userId: user.id },
+        include: [{ model: Recipe }]
+      });
+
+      const userData = { ...user.toSafeObject(), userRecipes, favorites };
+
+      return res.json({ user: userData });
+    } else return res.json({});
 });
 
 router.post('/', validateLogin, async (req, res, next) => {

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe } from '../../store/setRecipe';
 
 import RecipeComment from './RecipeComment';
-import { fetchFavorites } from '../../store/favorites';
 
 const SetRecipe = () => {
     const dispatch = useDispatch();
@@ -40,7 +39,6 @@ const SetRecipe = () => {
                 <div
                 onClick={async () => {
                     await dispatch(favoriteRecipe(userId, setRecipe.id));
-                    await dispatch(fetchFavorites(userId));
                 }} 
                 className='m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
                     Favorite
