@@ -14,4 +14,14 @@ router.post('/', async (req, res) => {
     return res.status(201).json(newFavorite);
 });
 
+
+// Delete a Favorite
+router.delete('/:favoriteId', async (req, res) => {
+    const queriedFav = await Favorite.findByPk(req.params.favoriteId);
+
+    await queriedFav.destroy();
+
+    return res.json({ status: 'Successfully Deleted' });
+});
+
 module.exports = router;

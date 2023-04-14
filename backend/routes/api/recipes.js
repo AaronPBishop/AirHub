@@ -95,7 +95,7 @@ router.delete('/:recipeId', async (req, res) => {
 
     await queriedRecipe.destroy();
 
-    return res.json({ status: 'Successfully deleted' });
+    return res.json({ status: 'Successfully Deleted' });
 });
 
 

@@ -67,7 +67,15 @@ router.post('/', validateLogin, async (req, res, next) => {
 
     await setTokenCookie(res, user);
 
-    return res.json({ user });
+    const userRecipes = await Recipe.findAll({ where: { ownerId: req.user.id }});
+    const favorites = await Favorite.findAll({ 
+      where: { userId: user.id },
+      include: [{ model: Recipe }]
+    });
+
+    const userData = { ...user.toSafeObject(), userRecipes, favorites };
+    
+    return res.json({ user: userData });
 });
 
 router.delete('/', (_req, res) => {

@@ -1,14 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe } from '../../store/setRecipe';
+import { restoreUser } from '../../store/user.js';
+import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRecipe } from '../../store/setRecipe';
 
 import RecipeComment from './RecipeComment';
 
 const SetRecipe = () => {
     const dispatch = useDispatch();
 
-    const userId = useSelector(state => state.user.user && state.user.user.id);
+    const user = useSelector(state => state.user.user && state.user.user);
     const setRecipe = useSelector(state => state.setRecipe.recipe);
 
     const [clickedAdd, setClickedAdd] = useState(false);
@@ -16,6 +17,9 @@ const SetRecipe = () => {
 
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(5);
+
+    const [hasFavorited, setHasFavorited] = useState(false);
+    const [favId, setFavId] = useState(null);
 
     useEffect(() => {
         const setRating = async () => {
@@ -28,6 +32,24 @@ const SetRecipe = () => {
         setRating();
     }, [rating]);
 
+    useEffect(() => {
+        if (user && setRecipe) {
+            for (let key in user.favorites) {
+                const currFav = user.favorites[key];
+                
+                if (currFav) {
+                    if (currFav.recipeId === setRecipe.id) {
+                        setHasFavorited(true);
+                        setFavId(currFav.id);
+                    } else {
+                        setHasFavorited(false);
+                        setFavId(null);
+                    };
+                };
+            };
+        };
+    }, [user, setRecipe]);
+
     if (setRecipe && Object.keys(setRecipe).length) return (
         <div 
         className={`
@@ -38,10 +60,24 @@ const SetRecipe = () => {
             <div className='flex'>
                 <div
                 onClick={async () => {
-                    await dispatch(favoriteRecipe(userId, setRecipe.id));
+                    if (user && user.id) {
+                        if (hasFavorited) {
+                            await dispatch(unfavoriteRecipe(favId));
+                            await dispatch(restoreUser());
+
+                            return;
+                        };
+                        
+                        if (!hasFavorited) {
+                            await dispatch(favoriteRecipe(user.id, setRecipe.id));
+                            await dispatch(restoreUser());
+
+                            return;
+                        };
+                    };
                 }} 
                 className='m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
-                    Favorite
+                    {hasFavorited ? 'Unfavorite' : 'Favorite'}
                 </div>
             </div>
 

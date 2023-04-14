@@ -4,9 +4,7 @@ import Recipe from '../../AllRecipes/Recipe.js';
 
 const FavoritesContainer = () => {
     const favorites = useSelector(state => state.user.user && state.user.user.favorites);
-
-    console.log(favorites)
-
+    
     return (
         <div
         style={{height: '85vh'}} 

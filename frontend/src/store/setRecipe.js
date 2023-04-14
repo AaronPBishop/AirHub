@@ -48,6 +48,10 @@ export const favoriteRecipe = (userId, recipeId) => async () => {
     });
 };
 
+export const unfavoriteRecipe = (favoriteId) => async () => {
+    await csrfFetch(`/api/favorites/${favoriteId}`, { method: 'DELETE' });
+};
+
 // MAIN REDUCER
 const setRecipeReducer = (state = initialState, action) => {
     switch (action.type) {
