@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { restoreUser } from '../../store/user.js';
-import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRecipe } from '../../store/setRecipe';
+import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRecipe, deleteRecipe } from '../../store/setRecipe';
+import { fetchRecipes } from '../../store/recipes.js';
 
 import RecipeComment from './RecipeComment';
 
@@ -20,6 +21,8 @@ const SetRecipe = () => {
 
     const [hasFavorited, setHasFavorited] = useState(false);
     const [favId, setFavId] = useState(null);
+
+    const [isOwner, setIsOwner] = useState(false);
 
     useEffect(() => {
         const setRating = async () => {
@@ -47,6 +50,18 @@ const SetRecipe = () => {
                     };
                 };
             };
+
+            for (let key in user.userRecipes) {
+                const currRecipe = user.userRecipes[key];
+                
+                if (currRecipe) {
+                    if (currRecipe.ownerId === user.id) {
+                        setIsOwner(true);
+                    } else {
+                        setIsOwner(false);
+                    };
+                };
+            };
         };
     }, [user, setRecipe]);
 
@@ -57,7 +72,7 @@ const SetRecipe = () => {
             h-screen w-screen p-4 pt-2 pb-20
             text-center
         `}>
-            <div className='flex'>
+            <div className='flex justify-between'>
                 <div
                 onClick={async () => {
                     if (user && user.id) {
@@ -78,6 +93,18 @@ const SetRecipe = () => {
                 }} 
                 className='m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
                     {hasFavorited ? 'Unfavorite' : 'Favorite'}
+                </div>
+
+                <div
+                onClick={async () => {
+                    await dispatch(deleteRecipe(setRecipe.id));
+                    await dispatch(fetchRecipes());
+                }}
+                className={`
+                    ${!isOwner && 'hidden'}
+                    m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
+                }>
+                    Delete
                 </div>
             </div>
 
