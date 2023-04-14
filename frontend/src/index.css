@@ -4,11 +4,8 @@
 
 html {
     font-family: 'Roboto', sans-serif;
-    background-color: rgb(186 230 253);
-}
-
-body {
     overflow: hidden;
+    background: linear-gradient(rgb(10, 10, 40), rgb(0, 0, 30));   
 }
 
 .container-shadow {

@@ -12,7 +12,7 @@ const BaseContainer = () => {
 
     return (
         <div className={`
-            bg-sky-200
+            bg-sky-200 w-5/6 m-auto rounded-lg overflow-auto my-2 container-shadow
         `}>
             <div className={`
                 ${

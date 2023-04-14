@@ -17,7 +17,7 @@ const AllRecipesContainer = () => {
         style={{height: '85vh'}} 
         className={`
             flex justify-evenly flex-wrap
-            overflow-y-scroll p-5 w-4/6 m-auto mt-2 container-shadow rounded-lg
+            p-6 m-auto w-5/6 rounded-lg
         `}>
             {
                 recipes && recipes.length &&
