@@ -8,7 +8,7 @@ const SearchBar = () => {
 
     const [clicked, setClicked] = useState(false);
     const [brand, setBrand] = useState('');
-    const [product, setProduct] = useState('');
+    const [item, setItem] = useState('');
 
     return (
         <div
@@ -16,7 +16,7 @@ const SearchBar = () => {
         className='w-3/5'>
             <input 
              disabled={true}
-             placeHolder="Search Recipes by Brand or Product"
+             placeHolder="Search Recipes by Brand or Item"
              className={`
                 ${clicked && 'hidden'}
                 bg-stone-50 rounded-lg h-10 cursor-pointer text-center w-full m-1
@@ -36,13 +36,13 @@ const SearchBar = () => {
                 </input>
 
                 <input
-                onChange={e => setProduct(e.target.value)}
-                placeHolder="Product"
+                onChange={e => setItem(e.target.value)}
+                placeHolder="Item"
                 className='bg-stone-50 rounded-lg h-10 cursor-pointer text-center w-5/6 m-1'>
                 </input>
 
                 <div
-                onClick={() => dispatch(searchRecipes(brand, product))}
+                onClick={() => dispatch(searchRecipes(brand, item))}
                 className='m-1 p-4 h-10 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-center text-white cursor-pointer'>
                     Go
                 </div>

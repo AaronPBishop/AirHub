@@ -99,6 +99,49 @@ router.delete('/:recipeId', async (req, res) => {
 });
 
 
+// Search for Recipes
+router.post('/search', async (req, res, next) => {
+    const { brand, item } = req.body;
+
+    if (brand && !item) {
+        const queriedRecipes = await Recipe.findAll({
+            where: {
+                brand: {
+                    [Op.like]: `%${brand.toLowerCase()}%`
+                },
+            }
+        });
+
+        return res.json({ recipes: queriedRecipes });
+    };
+
+    if (!brand && item) {
+        const queriedRecipes = await Recipe.findAll({
+            where: {
+                item: {
+                    [Op.like]: `%${item.toLowerCase()}%`
+                },
+            }
+        });
+
+        return res.json({ recipes: queriedRecipes });
+    };
+
+    const queriedRecipes = await Recipe.findAll({
+        where: {
+            brand: {
+                [Op.like]: `%${brand.toLowerCase()}%`
+            },
+            item: {
+                [Op.like]: `%${item.toLowerCase()}%`
+            },
+        }
+    });
+
+    return res.json({ recipes: queriedRecipes });
+});
+
+
 // Rate Recipe By Id
 router.put('/:recipeId/rate', async (req, res) => {
     const { rating } = req.body;

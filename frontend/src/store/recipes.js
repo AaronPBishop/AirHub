@@ -19,12 +19,12 @@ export const fetchRecipes = () => async (dispatch) => {
     dispatch(populateRecipes(resData));
 };
 
-export const searchRecipes = (brand, product) => async (dispatch) => {
-    const fetchReq = await fetch(`/api/recipes/search`, { 
+export const searchRecipes = (brand, item) => async (dispatch) => {
+    const fetchReq = await csrfFetch(`/api/recipes/search`, { 
         method: 'POST',
         body: JSON.stringify({
             brand,
-            product
+            item
         }) 
     });
 
