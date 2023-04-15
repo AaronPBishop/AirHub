@@ -5,6 +5,9 @@ import { createRecipe } from '../../../store/recipes.js';
 import { resetMenu } from '../../../store/menu.js';
 import { restoreUser } from '../../../store/user.js';
 
+import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
+import { MinusSquare } from '@styled-icons/evaicons-solid/MinusSquare';
+
 const CreateRecipe = () => {
     const dispatch = useDispatch();
 
@@ -73,13 +76,19 @@ const CreateRecipe = () => {
                         <div
                         onClick={() => setCookTime(cookTime + 1)}
                         className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
-                            +
+                            <PlusSquareFill 
+                            className='text-sky-900'
+                            />
                         </div>
 
                         <div
-                        onClick={() => setCookTime(cookTime - 1)}
+                        onClick={() => {
+                            if (cookTime > 1) setCookTime(cookTime - 1);
+                        }}
                         className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
-                            -
+                            <MinusSquare 
+                            className='text-sky-900'
+                            />
                         </div>
                     </div>
                 </div>
