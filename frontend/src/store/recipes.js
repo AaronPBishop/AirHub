@@ -19,6 +19,20 @@ export const fetchRecipes = () => async (dispatch) => {
     dispatch(populateRecipes(resData));
 };
 
+export const searchRecipes = (brand, product) => async (dispatch) => {
+    const fetchReq = await fetch(`/api/recipes/search`, { 
+        method: 'POST',
+        body: JSON.stringify({
+            brand,
+            product
+        }) 
+    });
+
+    const resData = await fetchReq.json();
+
+    dispatch(populateRecipes(resData));
+};
+
 export const createRecipe = (brand, item, cookTime, cookTemp, notes) => async (dispatch) => {
     const fetchReq = await csrfFetch(`/api/recipes`, {
         method: 'POST',
