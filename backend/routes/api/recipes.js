@@ -105,11 +105,11 @@ router.post('/search', async (req, res, next) => {
 
     if (brand && !item) {
         const queriedRecipes = await Recipe.findAll({
-            where: {
-                brand: {
-                    [Op.like]: `%${brand.toLowerCase()}%`
-                },
-            }
+            where: Sequelize.where(
+                Sequelize.fn('LOWER', Sequelize.col('brand')),
+                'LIKE',
+                `%${brand.toLowerCase()}%`
+            ),
         });
 
         return res.json({ recipes: queriedRecipes });
@@ -117,11 +117,11 @@ router.post('/search', async (req, res, next) => {
 
     if (!brand && item) {
         const queriedRecipes = await Recipe.findAll({
-            where: {
-                item: {
-                    [Op.like]: `%${item.toLowerCase()}%`
-                },
-            }
+            where: Sequelize.where(
+                Sequelize.fn('LOWER', Sequelize.col('item')),
+                'LIKE',
+                `%${item.toLowerCase()}%`
+            ),
         });
 
         return res.json({ recipes: queriedRecipes });
@@ -129,13 +129,19 @@ router.post('/search', async (req, res, next) => {
 
     const queriedRecipes = await Recipe.findAll({
         where: {
-            brand: {
-                [Op.like]: `%${brand.toLowerCase()}%`
-            },
-            item: {
-                [Op.like]: `%${item.toLowerCase()}%`
-            },
-        }
+            [Op.and]: [
+                Sequelize.where(
+                    Sequelize.fn('lower', Sequelize.col('brand')),
+                    'LIKE',
+                    `%${brand.toLowerCase()}%`
+                ),
+                Sequelize.where(
+                    Sequelize.fn('lower', Sequelize.col('item')),
+                    'LIKE',
+                    `%${item.toLowerCase()}%`
+                ),
+            ],
+        },
     });
 
     return res.json({ recipes: queriedRecipes });
