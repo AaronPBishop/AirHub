@@ -18,7 +18,7 @@ const Recipe = ({ id, brand, item, avgRating }) => {
             cursor-pointer leading-10 
             rounded-lg text-center 
             border-b-4 border-sky-900 
-            text-lg my-6 shadow
+            text-lg my-6 shadow m-4
         `}>
             <p className='my-2 font-bold'>{brand}</p>
             <p className='my-2 font-bold'>{item}</p>

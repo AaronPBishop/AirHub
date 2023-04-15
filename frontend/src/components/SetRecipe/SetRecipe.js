@@ -29,6 +29,7 @@ const SetRecipe = () => {
             if (setRecipe && Object.keys(setRecipe).length) {
                 await dispatch(rateRecipe(setRecipe.id, rating));
                 await dispatch(fetchSetRecipe(setRecipe.id));
+                await dispatch(fetchRecipes());
             };
         };
 
@@ -67,9 +68,10 @@ const SetRecipe = () => {
 
     if (setRecipe && Object.keys(setRecipe).length) return (
         <div 
+        style={{height: '85vh'}}
         className={`
-            text-white bg-sky-200 overflow-auto
-            h-screen w-screen p-4 pt-2 pb-20
+            text-white bg-sky-200 overflow-y-auto
+            w-screen p-4 pt-2
             text-center
         `}>
             <div className='flex justify-between'>
@@ -187,7 +189,7 @@ const SetRecipe = () => {
                     await setClickedAdd(false);
                     await setComment('');
                 }}
-                className='p-6 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg cursor-pointer'>
+                className='p-4 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg cursor-pointer'>
                     Submit
                 </div>
             </div>

@@ -10,7 +10,7 @@ const UserRecipesContainer = () => {
         style={{height: '85vh'}} 
         className={`
             flex justify-evenly flex-wrap
-            p-6 m-auto w-5/6 rounded-lg
+            m-auto rounded-lg w-5/6
         `}>
             {
                 userRecipes && userRecipes.length &&

@@ -24,9 +24,9 @@ const UserOptionsContainer = () => {
     }, [menu]);
 
     return (
-        <div className={`
-            ${!clickedFavorites && !clickedRecipes && 'mt-14 pb-36'}
-        `}>
+        <div
+        style={{height: '79.5vh'}} 
+        className='mt-10'>
             <div className={`
                 ${clickedNewRecipe ? 'hidden' : clickedFavorites ? 'hidden' : clickedRecipes && 'hidden'}
             `}>
