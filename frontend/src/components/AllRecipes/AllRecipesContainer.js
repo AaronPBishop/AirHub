@@ -14,13 +14,12 @@ const AllRecipesContainer = () => {
 
     return (
         <div
-        style={{height: '85vh'}} 
         className={`
             flex justify-evenly flex-wrap
             p-6 m-auto w-5/6 rounded-lg
         `}>
             {
-                recipes && recipes.length &&
+                (recipes && recipes.length > 0) &&
                 recipes.map(currRecipe => 
                 <Recipe 
                 id={currRecipe.id}

@@ -28,6 +28,7 @@ const CreateRecipe = () => {
 
                 <input 
                 onChange={e => setBrand(e.target.value)}
+                value={brand}
                 className={`
                     m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
@@ -44,6 +45,7 @@ const CreateRecipe = () => {
 
                 <input 
                 onChange={e => setItem(e.target.value)}
+                value={item}
                 className={`
                     m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>
@@ -111,6 +113,7 @@ const CreateRecipe = () => {
 
                 <input 
                 onChange={e => setNotes(e.target.value)}
+                value={notes}
                 className={`
                     m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
                 `}>

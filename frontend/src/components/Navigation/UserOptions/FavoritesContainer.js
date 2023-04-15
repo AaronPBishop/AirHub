@@ -7,13 +7,12 @@ const FavoritesContainer = () => {
     
     return (
         <div
-        style={{height: '85vh'}} 
         className={`
             flex justify-evenly flex-wrap
             m-auto rounded-lg w-5/6
         `}>
             {
-                favorites && favorites.length &&
+                (favorites && favorites.length > 0) &&
                 favorites.map(currFavorite => 
                 currFavorite.Recipe &&
                 <Recipe 

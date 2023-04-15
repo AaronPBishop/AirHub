@@ -11,8 +11,10 @@ const BaseContainer = () => {
     const setRecipe = useSelector(state => state.setRecipe.recipe);
 
     return (
-        <div className={`
-            bg-sky-200 w-5/6 m-auto rounded-lg overflow-auto my-4 h-11/12 container-shadow
+        <div 
+        style={{height: '85vh'}} 
+        className={`
+            bg-sky-200 w-5/6 m-auto rounded-lg overflow-auto my-4 container-shadow
         `}>
             <div className={`
                 ${
@@ -25,7 +27,8 @@ const BaseContainer = () => {
                 <AllRecipesContainer /> 
             </div>
 
-            <div className={`
+            <div 
+            className={`
                 ${!menu.clickedSignUp && 'hidden'}
                 flex justify-center
             `}>

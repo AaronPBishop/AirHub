@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { searchRecipes } from '../../store/recipes.js';
+import { clearRecipeData } from '../../store/setRecipe.js';
+
+import { BoxSearch } from '@styled-icons/fluentui-system-filled/BoxSearch';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -30,6 +33,7 @@ const SearchBar = () => {
              `}>
                 <input
                 onChange={e => setBrand(e.target.value)}
+                value={brand}
                 placeHolder="Brand"
                 style={{marginLeft: '4.2vw'}}
                 className='bg-stone-50 rounded-lg h-10 cursor-pointer text-center w-5/6 m-1'>
@@ -37,14 +41,27 @@ const SearchBar = () => {
 
                 <input
                 onChange={e => setItem(e.target.value)}
+                value={item}
                 placeHolder="Item"
                 className='bg-stone-50 rounded-lg h-10 cursor-pointer text-center w-5/6 m-1'>
                 </input>
 
                 <div
-                onClick={() => dispatch(searchRecipes(brand, item))}
-                className='m-1 p-4 h-10 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-center text-white cursor-pointer'>
-                    Go
+                onClick={e => {
+                    e.stopPropagation();
+
+                    dispatch(searchRecipes(brand, item));
+                    dispatch(clearRecipeData());
+
+                    setClicked(false);
+                    setBrand('');
+                    setItem('');
+                }}
+                style={{marginTop: '0.8vh'}}
+                className='m-1 px-2 py-1 h-10 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-center text-white cursor-pointer'>
+                    <BoxSearch 
+                    className='w-6'
+                    />
                 </div>
              </div>
         </div>

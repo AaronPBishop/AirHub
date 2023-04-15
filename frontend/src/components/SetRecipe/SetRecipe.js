@@ -51,7 +51,11 @@ const SetRecipe = () => {
                     };
                 };
             };
+        };
+    }, [user, setRecipe]);
 
+    useEffect(() => {
+        if (user) {
             for (let key in user.userRecipes) {
                 const currRecipe = user.userRecipes[key];
                 
@@ -68,7 +72,6 @@ const SetRecipe = () => {
 
     if (setRecipe && Object.keys(setRecipe).length) return (
         <div 
-        style={{height: '85vh'}}
         className={`
             text-white bg-sky-200 overflow-y-auto
             w-screen p-4 pt-2
@@ -82,6 +85,8 @@ const SetRecipe = () => {
                             await dispatch(unfavoriteRecipe(favId));
                             await dispatch(restoreUser());
 
+                            setHasFavorited(false);
+
                             return;
                         };
                         
@@ -89,11 +94,16 @@ const SetRecipe = () => {
                             await dispatch(favoriteRecipe(user.id, setRecipe.id));
                             await dispatch(restoreUser());
 
+                            setHasFavorited(true);
+
                             return;
                         };
                     };
                 }} 
-                className='m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
+                className={`
+                    ${!user && 'invisible'}
+                    m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer
+                `}>
                     {hasFavorited ? 'Unfavorite' : 'Favorite'}
                 </div>
 
@@ -104,7 +114,7 @@ const SetRecipe = () => {
                     await dispatch(restoreUser());
                 }}
                 className={`
-                    ${!isOwner && 'hidden'}
+                    ${(!user || !isOwner) && 'invisible'}
                     m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
                 }>
                     Delete
@@ -140,7 +150,10 @@ const SetRecipe = () => {
 
                 <div
                 onMouseLeave={() => !rating ? setHover(5) : setHover(rating)} 
-                className='flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700'>
+                className={`
+                    ${!user && 'invisible'}
+                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700
+                `}>
                     {
                         
                         Array.from({length: 5}).map((el, i) => {
@@ -166,7 +179,10 @@ const SetRecipe = () => {
 
                 <div 
                 onClick={() => setClickedAdd(clicked => !clicked)}
-                className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer'>
+                className={`
+                    ${!user && 'invisible'}
+                    m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer
+                `}>
                     Add Comment
                 </div>
             </div>

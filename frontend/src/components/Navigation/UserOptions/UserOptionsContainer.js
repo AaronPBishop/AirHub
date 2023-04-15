@@ -24,16 +24,15 @@ const UserOptionsContainer = () => {
     }, [menu]);
 
     return (
-        <div
-        style={{height: '79.5vh'}} 
-        className='mt-10'>
+        <div className='mt-4 w-full'>
             <div className={`
                 ${clickedNewRecipe ? 'hidden' : clickedFavorites ? 'hidden' : clickedRecipes && 'hidden'}
+                flex justify-center flex-wrap m-auto w-2/6
             `}>
                 <div
                 onClick={() => setClickedNewRecipe(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-4
                 `}>
                     New Recipe
                 </div>
@@ -41,7 +40,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedFavorites(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-4
                 `}>
                     My Favorites
                 </div>
@@ -49,7 +48,7 @@ const UserOptionsContainer = () => {
                 <div
                 onClick={() => setClickedRecipes(clicked => !clicked)}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-4
                 `}>
                     My Recipes
                 </div>
@@ -60,7 +59,7 @@ const UserOptionsContainer = () => {
                     dispatch(resetMenu());
                 }}
                 className={`
-                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-6
+                    text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg my-4
                 `}>
                     Log Out
                 </div>
