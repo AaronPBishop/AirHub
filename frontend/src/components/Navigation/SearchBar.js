@@ -18,7 +18,6 @@ const SearchBar = () => {
         onClick={() => setClicked(true)} 
         className='w-3/5'>
             <input 
-             disabled={true}
              placeHolder="Search Recipes by Brand or Item"
              className={`
                 ${clicked && 'hidden'}
