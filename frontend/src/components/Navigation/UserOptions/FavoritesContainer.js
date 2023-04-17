@@ -14,7 +14,7 @@ const FavoritesContainer = () => {
             {
                 (favorites && favorites.length > 0) &&
                 favorites.map(currFavorite => 
-                currFavorite &&
+                currFavorite && currFavorite.favRecipe &&
                 <Recipe 
                 id={currFavorite.favRecipe.id}
                 ownerId={currFavorite.favRecipe.ownerId}

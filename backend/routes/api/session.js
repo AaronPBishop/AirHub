@@ -107,13 +107,53 @@ router.post('/', validateLogin, async (req, res, next) => {
 
     await setTokenCookie(res, user);
 
-    const userRecipes = await Recipe.findAll({ where: { ownerId: req.user.id }});
-    const favorites = await Favorite.findAll({ 
-      where: { userId: user.id },
-      include: [{ model: Recipe }]
+    const userRecipes = await Recipe.findAll({ 
+      where: { ownerId: req.user.id },
+      attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+      include: [
+        {
+            model: Comment,
+            as: 'Comments',
+            attributes: ['id', 'userId', 'comment'],
+            include: [
+                {
+                    model: User,
+                    attributes: ['firstName', 'lastName']
+                }
+            ]
+        },
+      ],
     });
 
-    const userData = { ...user.toSafeObject(), userRecipes, favorites };
+    const favorites = await Favorite.findAll({ where: { userId: user.id } });
+
+    const favRecipes = [];
+    for (let key in favorites) {
+      const favId = favorites[key].dataValues.id;
+      const recipeId = favorites[key].dataValues.recipeId;
+
+      const favRecipe = await Recipe.findOne({ 
+        where: { id: recipeId },
+        attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+        include: [
+          {
+              model: Comment,
+              as: 'Comments',
+              attributes: ['id', 'userId', 'comment'],
+              include: [
+                  {
+                      model: User,
+                      attributes: ['firstName', 'lastName']
+                  }
+              ]
+          },
+        ],
+      });
+
+      if (favRecipe) favRecipes.push({favRecipe, favId});
+    };
+
+    const userData = { ...user.toSafeObject(), userRecipes, favorites: favRecipes };
     
     return res.json({ user: userData });
 });

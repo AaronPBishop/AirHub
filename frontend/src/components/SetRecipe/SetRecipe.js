@@ -59,12 +59,16 @@ const SetRecipe = () => {
     useEffect(() => {
         if (user && setRecipe) {
             for (let fav of user.favorites) {
-                if (fav.favRecipe.id === setRecipe.id) {
-                    setHasFavorited(true);
-                    setFavId(fav.favId);
-                } else {
-                    setHasFavorited(false);
-                    setFavId(null);
+                if (fav.favRecipe) {
+                    if (fav.favRecipe.id === setRecipe.id) {
+                        setHasFavorited(true);
+                        setFavId(fav.favId);
+    
+                        return;
+                    } else {
+                        setHasFavorited(false);
+                        setFavId(null);
+                    };
                 };
             };
         };
