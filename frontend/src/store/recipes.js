@@ -50,6 +50,23 @@ export const createRecipe = (brand, item, cookTime, cookTemp, notes) => async (d
     dispatch(populateRecipes(resData));
 };
 
+export const editRecipe = (recipeId, brand, item, cookTime, cookTemp, notes) => async (dispatch) => {
+    const fetchReq = await csrfFetch(`/api/recipes/${recipeId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            brand,
+            item,
+            cookTime,
+            cookTemp,
+            notes
+        })
+    });
+
+    const resData = await fetchReq.json();
+
+    dispatch(populateRecipes(resData));
+};
+
 // MAIN REDUCER
 const recipeReducer = (state = initialState, action) => {
     switch (action.type) {

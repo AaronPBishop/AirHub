@@ -69,7 +69,7 @@ const UserOptionsContainer = () => {
                 ${!clickedNewRecipe && 'hidden'}
                 pb-20
             `}>
-                <CreateRecipe />
+                <CreateRecipe isEdit={false} recipeId={null} prevBrand={''} prevItem={''} prevCookTime={8} prevCookTemp={400} prevNotes={''} />
             </div>
 
             <div className={`

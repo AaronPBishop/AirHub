@@ -1,23 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
-import { createRecipe } from '../../../store/recipes.js';
+import { createRecipe, editRecipe } from '../../../store/recipes.js';
 import { resetMenu } from '../../../store/menu.js';
 import { restoreUser } from '../../../store/user.js';
 
 import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
 import { MinusSquare } from '@styled-icons/evaicons-solid/MinusSquare';
 
-const CreateRecipe = () => {
+const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, prevCookTemp, prevNotes }) => {
     const dispatch = useDispatch();
 
     const [prompt, setPrompt] = useState(0);
 
-    const [brand, setBrand] = useState('');
-    const [item, setItem] = useState('');
-    const [cookTime, setCookTime] = useState(8);
-    const [cookTemp, setCookTemp] = useState(400);
-    const [notes, setNotes] = useState('');
+    const [brand, setBrand] = useState(prevBrand);
+    const [item, setItem] = useState(prevItem);
+    const [cookTime, setCookTime] = useState(prevCookTime);
+    const [cookTemp, setCookTemp] = useState(prevCookTemp);
+    const [notes, setNotes] = useState(prevNotes);
 
     return (
         <div style={{width: '36vw'}} className='text-white mt-20 m-auto bg-sky-300 rounded-lg shadow'>
@@ -142,17 +142,27 @@ const CreateRecipe = () => {
                 <div 
                 onClick={async () => {
                     if (prompt === 4) {
-                        await dispatch(createRecipe(brand, item, cookTime, cookTemp, notes));
+                        if (!isEdit) {
+                            await dispatch(createRecipe(brand, item, cookTime, cookTemp, notes));
+                            await dispatch(resetMenu());
+                            await dispatch(restoreUser());
+
+                            setPrompt(0);
+                            setBrand('');
+                            setItem('');
+                            setCookTime(8);
+                            setCookTemp(400);
+                            setNotes('');
+                            
+                            return;
+                        };
+
+                        await dispatch(editRecipe(recipeId, brand, item, cookTime, cookTemp, notes));
                         await dispatch(resetMenu());
                         await dispatch(restoreUser());
 
                         setPrompt(0);
-                        setBrand('');
-                        setItem('');
-                        setCookTime(8);
-                        setCookTemp(400);
-                        setNotes('');
-                        
+
                         return;
                     };
 

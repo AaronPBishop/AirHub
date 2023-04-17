@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
             notes
         });
 
-        const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'avgRating', 'previewImg'] });
+        const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'] });
 
         return res.json({ recipes: allRecipes });
     } catch (e) {
@@ -72,7 +72,9 @@ router.put('/:recipeId', async (req, res) => {
         previewImg
     });
 
-    return res.json({ recipe: queriedRecipe });
+    const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'] });
+
+    return res.json({ recipes: allRecipes });
 });
 
 

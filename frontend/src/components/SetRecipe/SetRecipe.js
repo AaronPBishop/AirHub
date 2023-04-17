@@ -6,6 +6,7 @@ import { setRecipeData, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRe
 import { fetchRecipes } from '../../store/recipes.js';
 
 import RecipeComment from './RecipeComment';
+import CreateRecipe from '../Navigation/UserOptions/CreateRecipe.js';
 
 const SetRecipe = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const SetRecipe = () => {
 
     const [hasFavorited, setHasFavorited] = useState(false);
     const [favId, setFavId] = useState(null);
+
+    const [clickedEdit, setClickedEdit] = useState(false);
 
     const [isOwner, setIsOwner] = useState(false);
 
@@ -40,8 +43,8 @@ const SetRecipe = () => {
                     notes: currRecipe.notes, 
                     avgRating: currRecipe.avgRating, 
                     comments: currRecipe.Comments
-                }))
-            }
+                }));
+            };
         };
     }, [allRecipes]);
 
@@ -81,6 +84,8 @@ const SetRecipe = () => {
         };
     }, [setRecipe]);
 
+    useEffect(() => { setClickedEdit(false) }, [user]);
+
     if (setRecipe) return (
         <div 
         className={`
@@ -118,21 +123,36 @@ const SetRecipe = () => {
                     {hasFavorited ? 'Unfavorite' : 'Favorite'}
                 </div>
 
-                <div
-                onClick={async () => {
-                    await dispatch(deleteRecipe(setRecipe.id));
-                    await dispatch(fetchRecipes());
-                    await dispatch(restoreUser());
-                }}
-                className={`
-                    ${(!user || !isOwner) && 'invisible'}
-                    m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
-                }>
-                    Delete
+                <div className='flex'>
+                    <div
+                    onClick={() => setClickedEdit(clicked => !clicked)}
+                    className={`
+                        ${(!user || !isOwner) && 'invisible'}
+                        m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
+                    }>
+                        Edit
+                    </div>
+
+                    <div
+                    onClick={async () => {
+                        await dispatch(deleteRecipe(setRecipe.id));
+                        await dispatch(fetchRecipes());
+                        await dispatch(restoreUser());
+                    }}
+                    className={`
+                        ${(!user || !isOwner) && 'invisible'}
+                        m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
+                    }>
+                        Delete
+                    </div>
                 </div>
             </div>
 
-            <div className='mb-4 p-10 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow'>
+            <div 
+            className={`
+                ${clickedEdit && 'hidden'}
+                mb-4 p-10 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow
+            `}>
                 <p className='my-3 font-bold'>
                     Brand: <span className='text-yellow-200'>{setRecipe.brand}</span>
                 </p>
@@ -152,6 +172,15 @@ const SetRecipe = () => {
                 <p className='my-3 font-bold'>
                     <span className='text-yellow-200'>{setRecipe.avgRating && `⭐ ${setRecipe.avgRating}`}</span>
                 </p>
+            </div>
+
+            <div 
+            style={{marginTop: '-8vh'}}
+            className={`
+                ${!clickedEdit && 'hidden'}
+                mb-10 pb-10 w-3/6 m-auto
+            `}>
+                <CreateRecipe isEdit={true} recipeId={setRecipe.id} prevBrand={setRecipe.brand} prevItem={setRecipe.item} prevCookTime={setRecipe.cookTime} prevCookTemp={setRecipe.cookTemp} prevNotes={setRecipe.notes} />
             </div>
             
             <div className='flex justify-between'>
