@@ -24,6 +24,19 @@ export const postNewComment = (id, comment) => async () => {
     });
 };
 
+export const editComment = (id, comment) => async () => {
+    await csrfFetch(`/api/comments/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ comment })
+    });
+};
+
+export const deleteComment = (id) => async () => {
+    await csrfFetch(`/api/comments/${id}`, {
+        method: 'DELETE'
+    });
+};
+
 export const rateRecipe = (id, rating) => async () => {
     await csrfFetch(`/api/recipes/${id}/rate`, {
         method: 'PUT',

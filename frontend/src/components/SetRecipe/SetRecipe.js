@@ -192,7 +192,7 @@ const SetRecipe = () => {
                 onMouseLeave={() => !rating ? setHover(5) : setHover(rating)} 
                 className={`
                     ${!user && 'invisible'}
-                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700
+                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700 h-2/6 my-2
                 `}>
                     {
                         
@@ -208,7 +208,7 @@ const SetRecipe = () => {
                                 onMouseEnter={() => setHover(i)}
                                 className={`
                                     ${hover < i ? 'text-white' : 'text-yellow-200'}
-                                    mt-2 cursor-pointer p-2
+                                    cursor-pointer py-2 px-1
                                 `}>
                                     <span className='text-4xl'>&#9733;</span>
                                 </div>
@@ -255,7 +255,7 @@ const SetRecipe = () => {
                 {
                     setRecipe.comments && setRecipe.comments.length &&
                     setRecipe.comments.map(cmnt =>
-                        <RecipeComment firstName={cmnt.User.firstName} lastName={cmnt.User.lastName} comment={cmnt.comment} />
+                        <RecipeComment id={cmnt.id} ownerId={cmnt.userId} firstName={cmnt.User.firstName} lastName={cmnt.User.lastName} comment={cmnt.comment} />
                     )
                 }
             </div>

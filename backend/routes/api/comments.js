@@ -5,14 +5,6 @@ const { Comment } = require('../../db/models');
 
 const router = express.Router();
 
-// Get All of a User's Comments
-router.get('/', async (req, res) => {
-    const userComments = await Comment.findAll({ where: { userId: req.user.id }});
-
-    return res.json({ comments: userComments });
-});
-
-
 // Edit Comment By Id
 router.put('/:commentId', async (req, res) => {
     const { comment } = req.body;
@@ -24,7 +16,7 @@ router.put('/:commentId', async (req, res) => {
 
     await queriedComment.update({ comment });
 
-    return res.json({ queriedComment });
+    return res.json({ status: 'Successfully updated' });
 });
 
 
