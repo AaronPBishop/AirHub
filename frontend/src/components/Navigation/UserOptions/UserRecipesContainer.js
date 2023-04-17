@@ -17,9 +17,14 @@ const UserRecipesContainer = () => {
                 currRecipe &&
                 <Recipe 
                 id={currRecipe.id}
+                ownerId={currRecipe.ownerId}
                 brand={currRecipe.brand} 
                 item={currRecipe.item} 
+                cookTemp={currRecipe.cookTemp}
+                cookTime={currRecipe.cookTime}
+                notes={currRecipe.notes}
                 avgRating={currRecipe.avgRating} 
+                comments={currRecipe.Comments} 
                 />)
             }
         </div>

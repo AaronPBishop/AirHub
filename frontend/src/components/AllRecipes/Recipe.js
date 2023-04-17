@@ -1,18 +1,18 @@
 import { useDispatch } from 'react-redux';
 
-import { fetchSetRecipe } from '../../store/setRecipe.js';
+import { setRecipeData } from '../../store/setRecipe.js';
 import { resetMenu } from '../../store/menu.js';
 
 import { Food } from '@styled-icons/fluentui-system-regular/Food';
 
-const Recipe = ({ id, brand, item, avgRating }) => {
+const Recipe = ({ id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating, comments }) => {
     const dispatch = useDispatch();
 
     return (
         <div 
         onClick={() => {
             dispatch(resetMenu());
-            dispatch(fetchSetRecipe(id));
+            dispatch(setRecipeData({id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating, comments}));
         }}
         className={`
             relative text-white bg-sky-700 

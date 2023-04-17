@@ -14,12 +14,17 @@ const FavoritesContainer = () => {
             {
                 (favorites && favorites.length > 0) &&
                 favorites.map(currFavorite => 
-                currFavorite.Recipe &&
+                currFavorite &&
                 <Recipe 
-                id={currFavorite.Recipe.id}
-                brand={currFavorite.Recipe.brand} 
-                item={currFavorite.Recipe.item} 
-                avgRating={currFavorite.Recipe.avgRating} 
+                id={currFavorite.favRecipe.id}
+                ownerId={currFavorite.favRecipe.ownerId}
+                brand={currFavorite.favRecipe.brand} 
+                item={currFavorite.favRecipe.item} 
+                cookTemp={currFavorite.favRecipe.cookTemp}
+                cookTime={currFavorite.favRecipe.cookTime}
+                notes={currFavorite.favRecipe.notes}
+                avgRating={currFavorite.favRecipe.avgRating} 
+                comments={currFavorite.favRecipe.Comments}
                 />)
             }
         </div>

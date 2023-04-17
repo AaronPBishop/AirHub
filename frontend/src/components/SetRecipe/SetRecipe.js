@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { restoreUser } from '../../store/user.js';
-import { fetchSetRecipe, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRecipe, deleteRecipe } from '../../store/setRecipe';
+import { setRecipeData, postNewComment, rateRecipe, favoriteRecipe, unfavoriteRecipe, deleteRecipe } from '../../store/setRecipe';
 import { fetchRecipes } from '../../store/recipes.js';
 
 import RecipeComment from './RecipeComment';
@@ -11,6 +11,7 @@ const SetRecipe = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.user.user && state.user.user);
+    const allRecipes = useSelector(state => state.recipes.recipes);
     const setRecipe = useSelector(state => state.setRecipe.recipe);
 
     const [clickedAdd, setClickedAdd] = useState(false);
@@ -25,10 +26,29 @@ const SetRecipe = () => {
     const [isOwner, setIsOwner] = useState(false);
 
     useEffect(() => {
+        for (let key in allRecipes) {
+            const currRecipe = allRecipes[key];
+
+            if (setRecipe && setRecipe.id === currRecipe.id) {
+                dispatch(setRecipeData({
+                    id: currRecipe.id, 
+                    ownerId: currRecipe.ownerId, 
+                    brand: currRecipe.brand, 
+                    item: currRecipe.item, 
+                    cookTemp: currRecipe.cookTemp, 
+                    cookTime: currRecipe.cookTime, 
+                    notes: currRecipe.notes, 
+                    avgRating: currRecipe.avgRating, 
+                    comments: currRecipe.Comments
+                }))
+            }
+        };
+    }, [allRecipes]);
+
+    useEffect(() => {
         const setRating = async () => {
-            if (setRecipe && Object.keys(setRecipe).length) {
+            if (setRecipe) {
                 await dispatch(rateRecipe(setRecipe.id, rating));
-                await dispatch(fetchSetRecipe(setRecipe.id));
                 await dispatch(fetchRecipes());
             };
         };
@@ -38,39 +58,26 @@ const SetRecipe = () => {
 
     useEffect(() => {
         if (user && setRecipe) {
-            for (let key in user.favorites) {
-                const currFav = user.favorites[key];
-                
-                if (currFav) {
-                    if (currFav.recipeId === setRecipe.id) {
-                        setHasFavorited(true);
-                        setFavId(currFav.id);
-                    } else {
-                        setHasFavorited(false);
-                        setFavId(null);
-                    };
+            for (let fav of user.favorites) {
+                if (fav.favRecipe.id === setRecipe.id) {
+                    setHasFavorited(true);
+                    setFavId(fav.favId);
+                } else {
+                    setHasFavorited(false);
+                    setFavId(null);
                 };
             };
         };
     }, [user, setRecipe]);
 
     useEffect(() => {
-        if (user) {
-            for (let key in user.userRecipes) {
-                const currRecipe = user.userRecipes[key];
-                
-                if (currRecipe) {
-                    if (currRecipe.ownerId === user.id) {
-                        setIsOwner(true);
-                    } else {
-                        setIsOwner(false);
-                    };
-                };
-            };
+        if (user && setRecipe) {
+            if (setRecipe.ownerId === user.id) setIsOwner(true);
+            else setIsOwner(false);
         };
-    }, [user, setRecipe]);
+    }, [setRecipe]);
 
-    if (setRecipe && Object.keys(setRecipe).length) return (
+    if (setRecipe) return (
         <div 
         className={`
             text-white bg-sky-200 overflow-y-auto
@@ -145,7 +152,7 @@ const SetRecipe = () => {
             
             <div className='flex justify-between'>
                 <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg'>
-                    {setRecipe.Comments.length} Comments
+                    {setRecipe.comments && setRecipe.comments.length} Comments
                 </div>
 
                 <div
@@ -188,20 +195,21 @@ const SetRecipe = () => {
             </div>
 
             <div className={`
-                flex justify-center h-1/6 p-4
+                flex justify-center p-4
                 ${!clickedAdd && 'hidden'}
             `}>
                 <input 
                 onChange={e => setComment(e.target.value)}
+                value={comment}
                 className={`
-                    rounded-md ml-44 cursor-pointer text-center w-3/6 h-full text-black shadow
+                    rounded-md ml-44 cursor-pointer text-center w-3/6 text-black shadow
                 `}>
                 </input>
 
                 <div 
                 onClick={async () => {
                     await dispatch(postNewComment(setRecipe.id, comment));
-                    await dispatch(fetchSetRecipe(setRecipe.id));
+                    await dispatch(fetchRecipes());
                     await setClickedAdd(false);
                     await setComment('');
                 }}
@@ -210,10 +218,10 @@ const SetRecipe = () => {
                 </div>
             </div>
 
-            <div className={`mt-4 ${!setRecipe.Comments.length && 'hidden'}`}>
+            <div className={`mt-4 ${!setRecipe.comments || !setRecipe.comments.length && 'hidden'}`}>
                 {
-                    setRecipe.Comments.length &&
-                    setRecipe.Comments.map(cmnt =>
+                    setRecipe.comments && setRecipe.comments.length &&
+                    setRecipe.comments.map(cmnt =>
                         <RecipeComment firstName={cmnt.User.firstName} lastName={cmnt.User.lastName} comment={cmnt.comment} />
                     )
                 }

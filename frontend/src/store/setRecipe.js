@@ -3,10 +3,10 @@ import { csrfFetch } from './csrf';
 const initialState = {};
 
 // ACTION CREATORS
-export const setRecipe = (recipe) => {
+export const setRecipeData = (recipeData) => {
     return {
-        type: 'SET_RECIPE',
-        payload: recipe
+        type: 'SET_RECIPE_DATA',
+        payload: recipeData
     };
 };
 
@@ -17,16 +17,6 @@ export const clearRecipeData = () => {
 };
 
 // THUNKS
-export const fetchSetRecipe = (id) => async (dispatch) => {
-    const fetchReq = await fetch(`/api/recipes/${id}`, {
-        method: 'GET'
-    });
-
-    const resData = await fetchReq.json();
-
-    dispatch(setRecipe(resData));
-};
-
 export const postNewComment = (id, comment) => async () => {
     await csrfFetch(`/api/recipes/${id}/new_comment`, {
         method: 'POST',
@@ -61,8 +51,8 @@ export const deleteRecipe = (recipeId) => async (dispatch) => {
 // MAIN REDUCER
 const setRecipeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_RECIPE': {
-            return { ...action.payload };
+        case 'SET_RECIPE_DATA': {
+            return { recipe: { ...action.payload } };
         };
 
         case 'CLEAR_RECIPE_DATA': {

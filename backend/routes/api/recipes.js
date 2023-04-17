@@ -7,7 +7,22 @@ const router = express.Router();
 
 // Get All Recipes
 router.get('/', async (req, res) => {
-    const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'avgRating', 'previewImg'] });
+    const allRecipes = await Recipe.findAll({ 
+        attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+        include: [
+            {
+                model: Comment,
+                as: 'Comments',
+                attributes: ['id', 'userId', 'comment'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['firstName', 'lastName']
+                    }
+                ]
+            },
+        ],
+    });
 
     return res.json({ recipes: allRecipes });
 });
@@ -36,31 +51,6 @@ router.post('/', async (req, res, next) => {
         e.status = 400;
         next(e);
     };
-});
-
-
-// Get Recipe By Id
-router.get('/:recipeId', async (req, res) => {
-    const queriedRecipe = await Recipe.findOne({
-        where: { id: req.params.recipeId },
-        include: [
-            {
-                model: Comment,
-                as: 'Comments',
-                attributes: ['id', 'userId', 'comment'],
-                include: [
-                    {
-                        model: User,
-                        attributes: ['firstName', 'lastName']
-                    }
-                ]
-            },
-        ],
-    });
-
-    if (!queriedRecipe) return res.status(404).json({"message": "This recipe no longer exists", "statusCode": 404});
-
-    return res.json({ recipe: queriedRecipe });
 });
 
 
@@ -110,6 +100,20 @@ router.post('/search', async (req, res, next) => {
                 'LIKE',
                 `%${brand.toLowerCase()}%`
             ),
+            attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+            include: [
+                {
+                    model: Comment,
+                    as: 'Comments',
+                    attributes: ['id', 'userId', 'comment'],
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['firstName', 'lastName']
+                        }
+                    ]
+                },
+            ],
         });
 
         return res.json({ recipes: queriedRecipes });
@@ -122,12 +126,27 @@ router.post('/search', async (req, res, next) => {
                 'LIKE',
                 `%${item.toLowerCase()}%`
             ),
+            attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+            include: [
+                {
+                    model: Comment,
+                    as: 'Comments',
+                    attributes: ['id', 'userId', 'comment'],
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['firstName', 'lastName']
+                        }
+                    ]
+                },
+            ],
         });
 
         return res.json({ recipes: queriedRecipes });
     };
 
     const queriedRecipes = await Recipe.findAll({
+        attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
         where: {
             [Op.and]: [
                 Sequelize.where(
@@ -142,6 +161,19 @@ router.post('/search', async (req, res, next) => {
                 ),
             ],
         },
+        include: [
+            {
+                model: Comment,
+                as: 'Comments',
+                attributes: ['id', 'userId', 'comment'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['firstName', 'lastName']
+                    }
+                ]
+            },
+        ],
     });
 
     return res.json({ recipes: queriedRecipes });
