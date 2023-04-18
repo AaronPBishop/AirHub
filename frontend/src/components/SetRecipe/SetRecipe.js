@@ -231,7 +231,7 @@ const SetRecipe = () => {
                 onMouseLeave={() => !rating ? setHover(5) : setHover(rating)} 
                 className={`
                     ${!user && 'invisible'}
-                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700 h-2/6 my-2 px-6
+                    flex justify-evenly bg-sky-800 rounded-lg border-b-4 border-sky-900 h-2/6 my-2 px-6
                 `}>
                     {
                         
@@ -267,14 +267,14 @@ const SetRecipe = () => {
             </div>
 
             <div className={`
-                flex justify-center p-4
+                flex justify-center p-2 border
                 ${!clickedAdd && 'hidden'}
             `}>
                 <input 
                 onChange={e => setComment(e.target.value)}
                 value={comment}
                 className={`
-                    rounded-md ml-44 cursor-pointer text-center w-3/6 text-black shadow
+                    rounded-md ml-48 cursor-pointer text-center w-3/6 text-black shadow
                 `}>
                 </input>
 
@@ -287,8 +287,8 @@ const SetRecipe = () => {
                     setClickedAdd(false);
                     setComment('');
                 }}
-                className='p-4 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg cursor-pointer'>
-                    Submit
+                className='py-3 px-4 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg leading-1 font-bold cursor-pointer'>
+                    <span className='mt-0'>Submit</span>
                 </div>
             </div>
 
