@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Recipe.hasMany(models.Comment, { foreignKey: 'recipeId', onDelete: 'CASCADE' });
       Recipe.belongsTo(models.User, { foreignKey: 'ownerId', constraints: false });
+      Recipe.hasMany(models.Favorite, { foreignKey: 'recipeId', onDelete: 'CASCADE' });
     }
   }
   Recipe.init({

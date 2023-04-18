@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { searchRecipes } from '../../store/recipes.js';
 import { clearRecipeData } from '../../store/setRecipe.js';
+import { resetMenu } from '../../store/menu.js';
 
 import { BoxSearch } from '@styled-icons/fluentui-system-filled/BoxSearch';
 
@@ -32,6 +33,17 @@ const SearchBar = () => {
              `}>
                 <input
                 onChange={e => setBrand(e.target.value)}
+                onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                        dispatch(searchRecipes(brand, item));
+                        dispatch(clearRecipeData());
+                        dispatch(resetMenu());
+
+                        setClicked(false);
+                        setBrand('');
+                        setItem('');
+                    };
+                }}
                 value={brand}
                 placeHolder="Brand"
                 style={{marginLeft: '4.2vw'}}
@@ -40,6 +52,17 @@ const SearchBar = () => {
 
                 <input
                 onChange={e => setItem(e.target.value)}
+                onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                        dispatch(searchRecipes(brand, item));
+                        dispatch(clearRecipeData());
+                        dispatch(resetMenu());
+
+                        setClicked(false);
+                        setBrand('');
+                        setItem('');
+                    };
+                }}
                 value={item}
                 placeHolder="Item"
                 className='bg-stone-50 rounded-lg h-10 cursor-pointer text-center w-5/6 m-1'>
@@ -51,6 +74,7 @@ const SearchBar = () => {
 
                     dispatch(searchRecipes(brand, item));
                     dispatch(clearRecipeData());
+                    dispatch(resetMenu());
 
                     setClicked(false);
                     setBrand('');

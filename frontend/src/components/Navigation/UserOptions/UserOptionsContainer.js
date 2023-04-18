@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 import { deleteSession } from '../../../store/user.js';
-import { resetMenu } from '../../../store/menu.js';
+import { setClickedCreateRecipe, resetMenu } from '../../../store/menu.js';
 
 import CreateRecipe from './CreateRecipe.js';
 import FavoritesContainer from './FavoritesContainer.js';
@@ -18,7 +18,7 @@ const UserOptionsContainer = () => {
     const [clickedRecipes, setClickedRecipes] = useState(false);
 
     useEffect(() => {
-        setClickedNewRecipe(false);
+        if (!menu.clickedCreateRecipe) setClickedNewRecipe(false);
         setClickedFavorites(false);
         setClickedRecipes(false);
     }, [menu]);
@@ -30,7 +30,10 @@ const UserOptionsContainer = () => {
                 flex justify-center flex-wrap m-auto w-2/6
             `}>
                 <div
-                onClick={() => setClickedNewRecipe(clicked => !clicked)}
+                onClick={() => {
+                    dispatch(setClickedCreateRecipe());
+                    setClickedNewRecipe(true);
+                }}
                 className={`
                     text-white bg-sky-600 cursor-pointer pt-4 h-16 w-96 rounded-lg text-center border-b-4 border-sky-700 text-lg mt-20 my-4
                 `}>
@@ -66,8 +69,7 @@ const UserOptionsContainer = () => {
             </div>
 
             <div className={`
-                ${!clickedNewRecipe && 'hidden'}
-                pb-20
+                ${!clickedNewRecipe && 'hidden'} pt-10
             `}>
                 <CreateRecipe isEdit={false} recipeId={null} prevBrand={''} prevItem={''} prevCookTime={8} prevCookTemp={400} prevNotes={''} />
             </div>

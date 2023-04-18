@@ -65,16 +65,14 @@ const SetRecipe = () => {
     useEffect(() => {
         if ((user && user.favorites) && setRecipe) {
             for (let fav of user.favorites) {
-                if (fav.favRecipe) {
-                    if (fav.favRecipe.id === setRecipe.id) {
-                        setHasFavorited(true);
-                        setFavId(fav.favId);
-    
-                        return;
-                    } else {
-                        setHasFavorited(false);
-                        setFavId(null);
-                    };
+                if (fav.recipeId === setRecipe.id) {
+                    setHasFavorited(true);
+                    setFavId(fav.id);
+
+                    return;
+                } else {
+                    setHasFavorited(false);
+                    setFavId(null);
                 };
             };
         };
@@ -162,7 +160,7 @@ const SetRecipe = () => {
 
                 <Element style={{width: '24vw'}} className='text-sky-800 absolute top-0 left-0 right-0 bottom-0 m-auto spin-fryer' />
 
-                <div className='w-full relative'>
+                <div className='w-full relative select-text'>
                     <div className='flex justify-evenly m-auto w-11/12'>
                         <div className='text-right w-5/12'>
                             <p className='mb-3 font-bold text-xl'>
@@ -201,7 +199,7 @@ const SetRecipe = () => {
                         Additional Notes 
                     </p>
 
-                    <div className='bg-sky-900 rounded-lg p-6 font-bold border-b-4 border-sky-950 text-yellow-200 shadow'>
+                    <div className='bg-sky-900 rounded-lg p-6 font-bold border-b-4 border-sky-950 text-yellow-200 shadow select-text'>
                         {setRecipe.notes.length ? setRecipe.notes : 'Notes are Empty'}
                     </div>
 

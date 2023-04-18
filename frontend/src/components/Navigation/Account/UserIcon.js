@@ -18,7 +18,7 @@ const UserIcon = () => {
                 dispatch(clearRecipeData());
             }}
             className={`
-                flex justify-evenly text-amber-50 bg-amber-800 cursor-pointer leading-10 px-2 w-24 rounded-lg text-center border-b-4 border-amber-900 text-xl font-bold
+                flex justify-evenly text-stone-50 bg-amber-800 cursor-pointer leading-10 px-2 w-24 rounded-lg text-center border-b-4 border-amber-900 text-xl font-bold
             `}>
                 <span>
                     {`${user.firstName.split('')[0]}${user.lastName.split('')[0]}`}

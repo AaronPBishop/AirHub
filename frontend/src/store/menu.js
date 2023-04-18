@@ -1,7 +1,8 @@
 const initialState = {
     clickedSignUp: false,
     clickedLogIn: false,
-    clickedAccount: false
+    clickedAccount: false,
+    clickedCreateRecipe: false
 };
 
 // ACTION CREATORS
@@ -20,6 +21,12 @@ export const setClickedSignUp = () => {
 export const setClickedAccount = () => {
     return {
         type: 'CLICKED_ACCOUNT'
+    };
+};
+
+export const setClickedCreateRecipe = () => {
+    return {
+        type: 'CLICKED_CREATE_RECIPE'
     };
 };
 
@@ -63,11 +70,23 @@ const menuReducer = (state = initialState, action) => {
         case 'CLICKED_ACCOUNT': {
             if (currentState.clickedAccount) {
                 currentState.clickedAccount = false;
+                
+                for (let key in currentState) currentState[key] = false;
+
                 return currentState;
             };
 
             for (let key in currentState) currentState[key] = false;
             
+            currentState.clickedAccount = true;
+
+            return currentState;
+        };
+
+        case 'CLICKED_CREATE_RECIPE': {
+            for (let key in currentState) currentState[key] = false;
+            
+            currentState.clickedCreateRecipe = true;
             currentState.clickedAccount = true;
 
             return currentState;

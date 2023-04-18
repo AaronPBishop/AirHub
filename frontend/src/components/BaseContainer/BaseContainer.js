@@ -14,7 +14,8 @@ const BaseContainer = () => {
         <div 
         style={{height: '85vh'}} 
         className={`
-            bg-sky-200 w-5/6 m-auto rounded-lg overflow-auto my-4 container-shadow
+            ${menu.clickedCreateRecipe ? 'w-3/6' : 'w-5/6'}
+            bg-sky-200 m-auto rounded-lg overflow-auto my-4 container-shadow
         `}>
             <div className={`
                 ${

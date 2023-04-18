@@ -4,7 +4,11 @@
 
 html {
     font-family: 'Roboto', sans-serif;
+
     overflow: hidden;
+
+    user-select: none;
+    
     background: linear-gradient(rgb(10, 10, 40), rgb(0, 0, 30));  
 }
 

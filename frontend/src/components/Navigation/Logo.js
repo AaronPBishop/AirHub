@@ -18,7 +18,7 @@ const Logo = () => {
                 dispatch(fetchRecipes());
             }}
             className={`
-                text-amber-50 flex bg-amber-800 cursor-pointer leading-10 pr-2 w-24 rounded-lg text-center border-b-4 border-amber-900 text-lg font-bold tracking-wide
+                text-stone-50 flex bg-amber-800 cursor-pointer leading-10 pr-2 w-24 rounded-lg text-center border-b-4 border-amber-900 text-lg font-bold tracking-wide
             `}>
                 <WeatherWindy />
 
