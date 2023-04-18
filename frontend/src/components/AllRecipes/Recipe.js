@@ -22,11 +22,21 @@ const Recipe = ({ id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating
             border-b-8 border-sky-900 
             text-lg my-6 shadow m-4
         `}>
-            <LocationFood className='text-sky-800 absolute top-0 left-0 right-0 bottom-0 m-auto w-56' />
+            <LocationFood className='text-sky-900 absolute top-0 left-0 right-0 bottom-0 m-auto w-56' />
 
-            <p className='my-2 font-bold absolute bottom-36 left-0 right-0 text-2xl text-glow tracking-wider'>{brand}</p>
-            <p className='my-2 font-bold absolute bottom-24 left-0 right-0 text-2xl text-glow tracking-wider'>{item}</p>
-            <p className='my-2 font-bold absolute bottom-10 left-0 right-0 text-1xl'>{avgRating ? `⭐ ${avgRating}` : 'No Rating'}</p>
+            <div 
+            className='bg-sky-700 w-full py-1 m-auto absolute bottom-24 left-0 right-0'>
+                <p className='my-1 font-bold text-xl text-glow tracking-widest'>{brand}</p>
+                <p className='my-1 font-bold text-xl text-glow tracking-widest'>{item}</p>
+            </div>
+
+            <p className='my-2 absolute bottom-10 left-0 right-0 font-bold text-2xl'>
+                {
+                    avgRating ?
+                    Array(avgRating).fill().map((el, i) => <span key={i}>⭐</span>)
+                    : 'No Rating'
+                }
+            </p>
         </div>
     );
 };

@@ -63,7 +63,7 @@ const SetRecipe = () => {
     }, [rating]);
 
     useEffect(() => {
-        if (user && setRecipe) {
+        if ((user && user.favorites) && setRecipe) {
             for (let fav of user.favorites) {
                 if (fav.favRecipe) {
                     if (fav.favRecipe.id === setRecipe.id) {
