@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setRecipeData } from '../../store/setRecipe.js';
 import { resetMenu } from '../../store/menu.js';
 
-import { Food } from '@styled-icons/fluentui-system-regular/Food';
+import { LocationFood } from '@styled-icons/zondicons/LocationFood'
 
 const Recipe = ({ id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating, comments }) => {
     const dispatch = useDispatch();
@@ -18,11 +18,11 @@ const Recipe = ({ id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating
             relative text-white bg-sky-700 
             h-64 w-64 p-4 pt-12 
             cursor-pointer leading-10 
-            rounded-lg text-center 
-            border-b-4 border-sky-900 
+            rounded-3xl text-center 
+            border-b-8 border-sky-900 
             text-lg my-6 shadow m-4
         `}>
-            <Food className='text-sky-800 absolute top-0 left-0 right-0 bottom-0 m-auto' />
+            <LocationFood className='text-sky-800 absolute top-0 left-0 right-0 bottom-0 m-auto w-56' />
 
             <p className='my-2 font-bold absolute bottom-36 left-0 right-0 text-2xl text-glow tracking-wider'>{brand}</p>
             <p className='my-2 font-bold absolute bottom-24 left-0 right-0 text-2xl text-glow tracking-wider'>{item}</p>

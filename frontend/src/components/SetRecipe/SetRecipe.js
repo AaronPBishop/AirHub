@@ -8,6 +8,8 @@ import { fetchRecipes } from '../../store/recipes.js';
 import RecipeComment from './RecipeComment';
 import CreateRecipe from '../Navigation/UserOptions/CreateRecipe.js';
 
+import { Element } from '@styled-icons/simple-icons/Element';
+
 const SetRecipe = () => {
     const dispatch = useDispatch();
 
@@ -153,53 +155,56 @@ const SetRecipe = () => {
             <div 
             className={`
                 ${clickedEdit && 'hidden'}
-                flex justify-center flex-wrap
+                flex justify-center flex-wrap relative
                 mb-4 p-10 py-6 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow
             `}>
-                <div className='w-full'>
-                    <div className='flex justify-evenly m-auto w-6/12'>
-                        <div className='text-right'>
-                            <p className='mb-3 font-bold'>
+
+                <Element style={{width: '24vw'}} className='text-sky-800 absolute top-0 left-0 right-0 bottom-0 m-auto spin-fryer' />
+
+                <div className='w-full relative'>
+                    <div className='flex justify-evenly m-auto w-11/12'>
+                        <div className='text-right w-5/12'>
+                            <p className='mb-3 font-bold text-xl'>
                                 Brand
                             </p>
-                            <p className='my-3 font-bold'>
+                            <p className='my-3 font-bold text-xl'>
                                 Item
                             </p>
-                            <p className='my-3 font-bold'>
+                            <p className='my-3 font-bold text-xl'>
                                 Temperature
                             </p>
-                            <p className='my-3 font-bold'>
+                            <p className='my-3 font-bold text-xl'>
                                 Cook Time
                             </p>
                         </div>
 
-                        <div className='text-left'>
-                            <p className='mb-3 font-bold text-yellow-200'>
+                        <div className='text-left w-5/12'>
+                            <p className='mb-3 font-bold text-yellow-200 text-xl'>
                                 {setRecipe.brand}
                             </p>
-                            <p className='my-3 font-bold text-yellow-200'>
+                            <p className='my-3 font-bold text-yellow-200 text-xl'>
                                 {setRecipe.item}
                             </p>
-                            <p className='my-3 font-bold text-yellow-200'>
+                            <p className='my-3 font-bold text-yellow-200 text-xl'>
                                 {setRecipe.cookTemp} degrees
                             </p>
-                            <p className='my-3 font-bold text-yellow-200'>
+                            <p className='my-3 font-bold text-yellow-200 text-xl'>
                                 {setRecipe.cookTime} minutes
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div className='w-4/6'>
-                    <p className='my-3 font-bold'>
+                <div className='w-4/6 relative'>
+                    <p className='my-3 font-bold text-xl'>
                         Additional Notes 
                     </p>
 
-                    <div className='bg-sky-900 rounded-lg p-6 font-bold border-b-4 border-sky-950 text-yellow-200'>
-                        {setRecipe.notes}
+                    <div className='bg-sky-900 rounded-lg p-6 font-bold border-b-4 border-sky-950 text-yellow-200 shadow'>
+                        {setRecipe.notes.length ? setRecipe.notes : 'Notes are Empty'}
                     </div>
 
-                    <p className='mt-6 font-bold text-yellow-200'>
+                    <p className='mt-6 font-bold text-yellow-200 text-xl'>
                         {setRecipe.avgRating ? `⭐ ${setRecipe.avgRating}` : 'No Ratings'}
                     </p>
                 </div>

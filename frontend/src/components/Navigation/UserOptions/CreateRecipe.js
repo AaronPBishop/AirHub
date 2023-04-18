@@ -33,7 +33,7 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                 onChange={e => setBrand(e.target.value)}
                 value={brand}
                 className={`
-                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-white w-full bg-sky-900 font-bold
                 `}>
                 </input>
             </div>
@@ -50,7 +50,7 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                 onChange={e => setItem(e.target.value)}
                 value={item}
                 className={`
-                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-white w-full bg-sky-900 font-bold
                 `}>
                 </input>
             </div>
@@ -68,14 +68,14 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                     flex justify-center
                     p-4 rounded-md text-center text-black w-full
                 `}>
-                    <div className='font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-lime-200'>
+                    <div className='font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-xl text-lime-200'>
                         {cookTime} minutes
                     </div>
 
                     <div className='flex text-lg text-white w-36'>
                         <div
                         onClick={() => setCookTime(cookTime + 1)}
-                        className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
+                        className='cursor-pointer m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
                             <PlusSquareFill 
                             className='text-sky-900'
                             />
@@ -85,7 +85,7 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                         onClick={() => {
                             if (cookTime > 1) setCookTime(cookTime - 1);
                         }}
-                        className='cursor-pointer font-bold m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
+                        className='cursor-pointer m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg text-white w-20'>
                             <MinusSquare 
                             className='text-sky-900'
                             />
@@ -107,7 +107,7 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                 type='number'
                 onChange={e => setCookTemp(e.target.value)}
                 className={`
-                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center w-full bg-sky-900 font-bold text-xl text-lime-200
                 `}>
                 </input>
             </div>
@@ -124,7 +124,7 @@ const CreateRecipe = ({ isEdit, recipeId, prevBrand, prevItem, prevCookTime, pre
                 onChange={e => setNotes(e.target.value)}
                 value={notes}
                 className={`
-                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-black w-full
+                    m-2 my-6 p-4 rounded-md cursor-pointer text-center text-white w-full bg-sky-900 font-bold
                 `}>
                 </input>
             </div>

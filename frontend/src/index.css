@@ -13,11 +13,24 @@ html {
 }
 
 .shadow {
-    box-shadow: 0px 0px 3px 1.5px rgba(60, 80, 100, 0.6);
+    box-shadow: 0px 0px 3px 1.5px rgba(60, 80, 120, 0.6);
 }
 
 .text-glow {
     text-shadow: 0px 0px 2px white;
+}
+
+.spin-fryer {
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 input:-webkit-autofill {
