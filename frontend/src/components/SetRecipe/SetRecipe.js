@@ -55,6 +55,7 @@ const SetRecipe = () => {
             if (setRecipe) {
                 await dispatch(rateRecipe(setRecipe.id, rating));
                 await dispatch(fetchRecipes());
+                await dispatch(restoreUser());
             };
         };
 
@@ -279,8 +280,10 @@ const SetRecipe = () => {
                 onClick={async () => {
                     await dispatch(postNewComment(setRecipe.id, comment));
                     await dispatch(fetchRecipes());
-                    await setClickedAdd(false);
-                    await setComment('');
+                    await dispatch(restoreUser());
+
+                    setClickedAdd(false);
+                    setComment('');
                 }}
                 className='p-4 ml-4 bg-sky-600 rounded-lg border-b-4 w-44 border-sky-700 text-lg cursor-pointer'>
                     Submit
