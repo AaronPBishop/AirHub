@@ -15,13 +15,14 @@ const SignUpForm = () => {
     return (
         <div 
         className={`
-            flex justify-center flex-wrap w-96 bg-amber-600 mt-16 py-4 rounded-lg
+            flex justify-center flex-wrap w-96 bg-amber-600 mt-24 py-4 rounded-lg
+            bg-sky-700 border-b-4 border-sky-900 shadow
         `}>
             <input 
             onChange={e => setFirstName(e.target.value)}
             placeHolder="First Name"
             className={`
-                bg-amber-100 rounded-lg h-10 cursor-pointer text-center w-80 my-3
+                bg-sky-900 rounded-lg h-10 cursor-pointer text-center w-80 my-3 text-lg text-white
             `}>
             </input>
 
@@ -29,7 +30,7 @@ const SignUpForm = () => {
             onChange={e => setLastName(e.target.value)}
             placeHolder="Last Name"
             className={`
-                bg-amber-100 rounded-lg h-10 cursor-pointer text-center w-80 my-3
+                bg-sky-900 rounded-lg h-10 cursor-pointer text-center w-80 my-3 text-lg text-white
             `}>
             </input>
 
@@ -37,7 +38,7 @@ const SignUpForm = () => {
             onChange={e => setEmail(e.target.value)}
             placeHolder="Email"
             className={`
-                bg-amber-100 rounded-lg h-10 cursor-pointer text-center w-80 my-3
+                bg-sky-900 rounded-lg h-10 cursor-pointer text-center w-80 my-3 text-lg text-white
             `}>
             </input>
 
@@ -45,7 +46,7 @@ const SignUpForm = () => {
             onChange={e => setPassword(e.target.value)}
             placeHolder="Password"
             className={`
-                bg-amber-100 rounded-lg h-10 cursor-pointer text-center w-80 my-3
+                bg-sky-900 rounded-lg h-10 cursor-pointer text-center w-80 my-3 text-lg text-white
             `}>
             </input>
 
@@ -55,7 +56,7 @@ const SignUpForm = () => {
                 dispatch(resetMenu());
             }}
             className={`
-                text-white bg-amber-800 cursor-pointer leading-10 w-48 rounded-lg text-center border-b-4 border-amber-900 text-lg my-3
+                my-3 m-2 p-2 px-3 bg-sky-900 rounded-lg border-b-4 border-sky-950 text-lg cursor-pointer text-white
             `}>
                 Create Account
             </div>

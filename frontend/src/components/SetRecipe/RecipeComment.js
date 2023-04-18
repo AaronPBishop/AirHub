@@ -62,7 +62,7 @@ const RecipeComment = ({ id, ownerId, firstName, lastName, comment }) => {
 
                     setClickedEdit(true);
                 }} 
-                className='m-2 p-2 bg-sky-900 rounded-lg border-b-4 border-sky-900 text-lg cursor-pointer text-center'>
+                className='m-2 p-2 bg-sky-900 rounded-lg border-b-4 border-sky-950 text-lg cursor-pointer text-center'>
                     {!clickedEdit ? 'Edit' : 'Confirm'}
                 </div>
 
@@ -72,7 +72,7 @@ const RecipeComment = ({ id, ownerId, firstName, lastName, comment }) => {
                     await dispatch(fetchRecipes());
                     await dispatch(restoreUser());
                 }}
-                className='m-2 p-2 bg-sky-900 rounded-lg border-b-4 border-sky-900 text-lg cursor-pointer text-center'>
+                className='m-2 p-2 bg-sky-900 rounded-lg border-b-4 border-sky-950 text-lg cursor-pointer text-center'>
                     Delete
                 </div>
             </div>

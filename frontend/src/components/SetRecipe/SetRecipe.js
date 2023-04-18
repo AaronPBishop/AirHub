@@ -93,7 +93,9 @@ const SetRecipe = () => {
             w-screen p-4 pt-2
             text-center
         `}>
-            <div className='flex justify-between'>
+            <div 
+            style={{height: '6vh'}}
+            className='flex justify-between'>
                 <div
                 onClick={async () => {
                     if (user && user.id) {
@@ -118,7 +120,7 @@ const SetRecipe = () => {
                 }} 
                 className={`
                     ${!user && 'invisible'}
-                    m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer
+                    py-2 px-3 bg-sky-600 rounded-lg border-b-4 border-sky-700 cursor-pointer font-bold
                 `}>
                     {hasFavorited ? 'Unfavorite' : 'Favorite'}
                 </div>
@@ -128,7 +130,7 @@ const SetRecipe = () => {
                     onClick={() => setClickedEdit(clicked => !clicked)}
                     className={`
                         ${(!user || !isOwner) && 'invisible'}
-                        m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
+                        py-2 px-6 bg-sky-600 rounded-lg border-b-4 border-sky-700 cursor-pointer font-bold`
                     }>
                         Edit
                     </div>
@@ -141,7 +143,7 @@ const SetRecipe = () => {
                     }}
                     className={`
                         ${(!user || !isOwner) && 'invisible'}
-                        m-2 mb-0 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer`
+                        py-2 px-5 ml-1 bg-sky-600 rounded-lg border-b-4 border-sky-700 cursor-pointer font-bold`
                     }>
                         Delete
                     </div>
@@ -151,27 +153,56 @@ const SetRecipe = () => {
             <div 
             className={`
                 ${clickedEdit && 'hidden'}
-                mb-4 p-10 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow
+                flex justify-center flex-wrap
+                mb-4 p-10 py-6 w-3/6 bg-sky-700 rounded-lg border-b-4 border-sky-900 text-lg mx-auto shadow
             `}>
-                <p className='my-3 font-bold'>
-                    Brand: <span className='text-yellow-200'>{setRecipe.brand}</span>
-                </p>
-                <p className='my-3 font-bold'>
-                    Item: <span className='text-yellow-200'>{setRecipe.item}</span>
-                </p>
-                <p className='my-3 font-bold'>
-                    Cook Temperature: <span className='text-yellow-200'>{setRecipe.cookTemp}</span>
-                </p>
-                <p className='my-3 font-bold'>
-                    Total Cook Time: <span className='text-yellow-200'>{setRecipe.cookTime} minutes</span>
-                </p>
-                <p className='my-3 font-bold'>
-                    Additional Notes 
-                    <p className='text-yellow-200'>{setRecipe.notes}</p>
-                </p>
-                <p className='my-3 font-bold'>
-                    <span className='text-yellow-200'>{setRecipe.avgRating && `⭐ ${setRecipe.avgRating}`}</span>
-                </p>
+                <div className='w-full'>
+                    <div className='flex justify-evenly m-auto w-6/12'>
+                        <div className='text-right'>
+                            <p className='mb-3 font-bold'>
+                                Brand
+                            </p>
+                            <p className='my-3 font-bold'>
+                                Item
+                            </p>
+                            <p className='my-3 font-bold'>
+                                Temperature
+                            </p>
+                            <p className='my-3 font-bold'>
+                                Cook Time
+                            </p>
+                        </div>
+
+                        <div className='text-left'>
+                            <p className='mb-3 font-bold text-yellow-200'>
+                                {setRecipe.brand}
+                            </p>
+                            <p className='my-3 font-bold text-yellow-200'>
+                                {setRecipe.item}
+                            </p>
+                            <p className='my-3 font-bold text-yellow-200'>
+                                {setRecipe.cookTemp} degrees
+                            </p>
+                            <p className='my-3 font-bold text-yellow-200'>
+                                {setRecipe.cookTime} minutes
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='w-4/6'>
+                    <p className='my-3 font-bold'>
+                        Additional Notes 
+                    </p>
+
+                    <div className='bg-sky-900 rounded-lg p-6 font-bold border-b-4 border-sky-950 text-yellow-200'>
+                        {setRecipe.notes}
+                    </div>
+
+                    <p className='mt-6 font-bold text-yellow-200'>
+                        {setRecipe.avgRating ? `⭐ ${setRecipe.avgRating}` : 'No Ratings'}
+                    </p>
+                </div>
             </div>
 
             <div 
@@ -184,7 +215,7 @@ const SetRecipe = () => {
             </div>
             
             <div className='flex justify-between'>
-                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg'>
+                <div className='m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 font-bold'>
                     {setRecipe.comments && setRecipe.comments.length} Comments
                 </div>
 
@@ -192,7 +223,7 @@ const SetRecipe = () => {
                 onMouseLeave={() => !rating ? setHover(5) : setHover(rating)} 
                 className={`
                     ${!user && 'invisible'}
-                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700 h-2/6 my-2
+                    flex justify-evenly bg-sky-600 rounded-lg border-b-4 border-sky-700 h-2/6 my-2 px-6
                 `}>
                     {
                         
@@ -208,7 +239,7 @@ const SetRecipe = () => {
                                 onMouseEnter={() => setHover(i)}
                                 className={`
                                     ${hover < i ? 'text-white' : 'text-yellow-200'}
-                                    cursor-pointer py-2 px-1
+                                    cursor-pointer py-1 px-1
                                 `}>
                                     <span className='text-4xl'>&#9733;</span>
                                 </div>
@@ -221,7 +252,7 @@ const SetRecipe = () => {
                 onClick={() => setClickedAdd(clicked => !clicked)}
                 className={`
                     ${!user && 'invisible'}
-                    m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 text-lg cursor-pointer
+                    m-2 p-4 bg-sky-600 rounded-lg border-b-4 border-sky-700 cursor-pointer font-bold
                 `}>
                     Add Comment
                 </div>
