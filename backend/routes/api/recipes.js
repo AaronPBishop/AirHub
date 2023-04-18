@@ -223,24 +223,15 @@ router.put('/:recipeId/rate', async (req, res) => {
     if (!queriedRecipe) return res.status(404).json({"message": "This recipe no longer exists", "statusCode": 404});
 
     const userRatings = queriedRecipe.userRatings;
-    const previousRating = userRatings[userId];
 
-    const allRatings = Object.values(userRatings);
-    const avgRating = allRatings.reduce((sum, rating) => sum + rating, 0) / allRatings.length;
+    const ratingsCopy = { ...userRatings };
+    ratingsCopy[userId] = rating;
 
-    if (previousRating === undefined) {
-        userRatings[userId] = rating;
+    const avgRating = (Object.values(ratingsCopy).reduce((sum, rating) => sum + rating, 0) / Object.values(ratingsCopy).length);
 
-        await queriedRecipe.update({ avgRating: rating, userRatings });
+    await queriedRecipe.update({ avgRating, userRatings: ratingsCopy });
 
-        return res.json({ queriedRecipe });
-    } else {
-        userRatings[userId] = (previousRating + rating) / 2;
-    };
-
-    await queriedRecipe.update({ avgRating, userRatings });
-
-    return res.json({ recipe: queriedRecipe });
+    return res.json({ status: 'Successfully Updated' });
 });
 
 

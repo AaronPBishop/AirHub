@@ -206,7 +206,11 @@ const SetRecipe = () => {
                     </div>
 
                     <p className='mt-6 font-bold text-yellow-200 text-xl'>
-                        {setRecipe.avgRating ? `⭐ ${setRecipe.avgRating}` : 'No Ratings'}
+                        {
+                            setRecipe.avgRating ?
+                            Array(Math.round(setRecipe.avgRating)).fill().map((el, i) => <span key={i}>⭐</span>)
+                            : 'No Rating'
+                        }
                     </p>
                 </div>
             </div>

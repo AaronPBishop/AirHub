@@ -13,7 +13,7 @@ const SignUpButton = () => {
             dispatch(setClickedSignUp());
         }}
         className={`
-            text-white bg-amber-800 cursor-pointer leading-10 w-20 rounded-lg text-center border-b-4 border-amber-900 text-lg
+            text-amber-50 bg-amber-800 cursor-pointer leading-10 w-20 rounded-lg text-center border-b-4 border-amber-900 text-xl px-1
         `}>
             Sign Up
         </div>

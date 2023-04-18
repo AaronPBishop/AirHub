@@ -33,7 +33,7 @@ const Recipe = ({ id, ownerId, brand, item, cookTemp, cookTime, notes, avgRating
             <p className='my-2 absolute bottom-10 left-0 right-0 font-bold text-2xl'>
                 {
                     avgRating ?
-                    Array(avgRating).fill().map((el, i) => <span key={i}>⭐</span>)
+                    Array(Math.round(avgRating)).fill().map((el, i) => <span key={i}>⭐</span>)
                     : 'No Rating'
                 }
             </p>
