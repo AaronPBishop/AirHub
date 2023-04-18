@@ -44,8 +44,23 @@ router.post('/', async (req, res, next) => {
             notes
         });
 
-        const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'] });
-
+        const allRecipes = await Recipe.findAll({ 
+            attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+            include: [
+                {
+                    model: Comment,
+                    as: 'Comments',
+                    attributes: ['id', 'userId', 'comment'],
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['firstName', 'lastName']
+                        }
+                    ]
+                },
+            ],
+        });
+    
         return res.json({ recipes: allRecipes });
     } catch (e) {
         e.status = 400;
@@ -72,7 +87,22 @@ router.put('/:recipeId', async (req, res) => {
         previewImg
     });
 
-    const allRecipes = await Recipe.findAll({ attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'] });
+    const allRecipes = await Recipe.findAll({ 
+        attributes: ['id', 'ownerId', 'brand', 'item', 'cookTime', 'cookTemp', 'notes', 'avgRating', 'previewImg'],
+        include: [
+            {
+                model: Comment,
+                as: 'Comments',
+                attributes: ['id', 'userId', 'comment'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['firstName', 'lastName']
+                    }
+                ]
+            },
+        ],
+    });
 
     return res.json({ recipes: allRecipes });
 });
